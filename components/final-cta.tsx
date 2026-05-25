@@ -1,11 +1,22 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
-import { useTheme } from "next-themes";
 import { motion } from "motion/react";
 import * as THREE from "three";
 
 const ease = [0.16, 1, 0.3, 1] as const;
+
+/**
+ * Final CTA section — visual + copy bookend with the Hero.
+ *
+ * Theme tokens this component expects (Tailwind v4 @theme):
+ *   --color-brand-900: ~ #0E1B33   deep navy (section base)
+ *   --color-warm-50:   ~ #FAF5EE   cream (CTA pill, matches Hero primary)
+ *
+ * Shader is the same aurora as Hero.tsx (lifted navy base + amber/blue/teal
+ * aurora + warm golden halo). Mouse interaction is stripped — this section
+ * is "decide and click", not "explore".
+ */
 
 const vertexShader = `
   varying vec2 vUv;
@@ -18,10 +29,7 @@ const vertexShader = `
 const fragmentShader = `
   uniform float iTime;
   uniform vec2 iResolution;
-  uniform float isDark;
   varying vec2 vUv;
-
-  #define PI 3.141592654
 
   vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
   vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -77,126 +85,78 @@ const fragmentShader = `
   void main() {
     vec2 uv = vUv;
     uv.x *= iResolution.x / iResolution.y;
-    
-    float t = iTime * 0.15;
-    
-    // Aurora beams - from bottom
-    float beam1 = snoise(vec3(uv.x * 1.5 + t * 0.5, uv.y * 0.8 - t * 0.2, t * 0.3));
-    float beam2 = snoise(vec3(uv.x * 2.0 - t * 0.3, uv.y * 0.6 + t * 0.1, t * 0.2 + 10.0));
-    float beam3 = snoise(vec3(uv.x * 1.2 + t * 0.2, uv.y * 1.0 - t * 0.15, t * 0.25 + 20.0));
-    
-    // Vertical gradient - stronger at bottom
+    float t = iTime * 0.12;
+
+    // Lifted navy base — matches Hero exactly
+    vec3 col = vec3(0.045, 0.075, 0.16);
+
+    float beam1 = snoise(vec3(uv.x * 1.4 + t * 0.5, uv.y * 0.8 - t * 0.2, t * 0.3));
+    float beam2 = snoise(vec3(uv.x * 1.8 - t * 0.3, uv.y * 0.6 + t * 0.1, t * 0.2 + 10.0));
+    float beam3 = snoise(vec3(uv.x * 1.1 + t * 0.2, uv.y * 1.0 - t * 0.15, t * 0.25 + 20.0));
+
     float verticalFade = pow(1.0 - uv.y, 1.5);
     float verticalFade2 = pow(1.0 - uv.y, 2.5);
-    
-    // Light beam shapes
+
     float light1 = smoothstep(0.0, 0.8, beam1 * verticalFade);
     float light2 = smoothstep(0.0, 0.7, beam2 * verticalFade);
     float light3 = smoothstep(0.0, 0.6, beam3 * verticalFade2);
-    
-    // Position-based color mixing
+
+    // Blue-dominant aurora with warm amber wash on the left — matches Hero
+    vec3 amber    = vec3(0.95, 0.65, 0.30);
+    vec3 deepBlue = vec3(0.12, 0.30, 0.75);
+    vec3 cyan     = vec3(0.20, 0.55, 0.90);
+    vec3 sky      = vec3(0.35, 0.50, 0.85);
+    vec3 teal     = vec3(0.10, 0.45, 0.55);
+
     float xPos = uv.x / (iResolution.x / iResolution.y);
-    
-    // Add subtle glow at bottom center
-    float centerGlow = exp(-pow((xPos - 0.5) * 2.0, 2.0)) * verticalFade2;
-    
-    vec3 col;
-    
-    if (isDark > 0.5) {
-      // Dark mode - original dark aurora effect
-      col = vec3(0.02, 0.02, 0.06);
-      
-      vec3 orange = vec3(0.95, 0.4, 0.1);
-      vec3 red = vec3(0.85, 0.15, 0.2);
-      vec3 pink = vec3(0.7, 0.2, 0.4);
-      vec3 blue = vec3(0.1, 0.3, 0.7);
-      vec3 cyan = vec3(0.1, 0.6, 0.8);
-      
-      col += orange * light1 * 0.6 * smoothstep(0.6, 0.2, xPos);
-      col += red * light1 * 0.5 * smoothstep(0.3, 0.5, xPos) * smoothstep(0.7, 0.5, xPos);
-      col += pink * light2 * 0.4 * smoothstep(0.4, 0.6, xPos);
-      col += blue * light3 * 0.5 * smoothstep(0.5, 0.8, xPos);
-      col += cyan * light2 * 0.3 * smoothstep(0.7, 1.0, xPos);
-      col += vec3(0.9, 0.5, 0.3) * centerGlow * 0.3;
-      
-      // Slight vignette
-      float vignette = 1.0 - pow(length(uv - vec2(0.5 * iResolution.x / iResolution.y, 0.5)) * 0.8, 2.0);
-      col *= max(vignette, 0.3);
-      col = pow(col, vec3(0.9));
-    } else {
-      // Light mode - soft pastel gradient on white
-      col = vec3(0.98, 0.98, 0.97);
-      
-      // Softer, more pastel colors for light mode
-      vec3 peach = vec3(1.0, 0.85, 0.75);
-      vec3 salmon = vec3(1.0, 0.75, 0.7);
-      vec3 lavender = vec3(0.85, 0.75, 0.95);
-      vec3 skyBlue = vec3(0.75, 0.85, 1.0);
-      
-      // Create a soft diffused blob effect
-      float blobIntensity = light1 * 0.5 + light2 * 0.3 + centerGlow * 0.8;
-      blobIntensity = smoothstep(0.0, 1.0, blobIntensity);
-      
-      // Blend pastel colors based on position
-      vec3 gradientColor = mix(peach, salmon, smoothstep(0.3, 0.5, xPos));
-      gradientColor = mix(gradientColor, lavender, smoothstep(0.5, 0.7, xPos));
-      gradientColor = mix(gradientColor, skyBlue, smoothstep(0.7, 0.9, xPos));
-      
-      // Apply the blob with soft edges
-      col = mix(col, gradientColor, blobIntensity * 0.7);
-      
-      // Soft radial fade from center-bottom
-      float radialFade = 1.0 - length(vec2(xPos - 0.5, uv.y - 0.3) * vec2(1.2, 1.5));
-      radialFade = smoothstep(0.0, 0.8, radialFade);
-      col = mix(vec3(0.98, 0.98, 0.97), col, radialFade);
-    }
-    
+
+    col += amber    * light1 * 0.45 * smoothstep(0.55, 0.0, xPos);
+    col += deepBlue * light2 * 0.55 * smoothstep(0.15, 0.45, xPos);
+    col += cyan     * light2 * 0.50 * smoothstep(0.35, 0.7, xPos);
+    col += sky      * light3 * 0.45 * smoothstep(0.55, 0.9, xPos);
+    col += teal     * light3 * 0.30 * smoothstep(0.75, 1.0, xPos);
+
+    // Warm golden halo bottom-center
+    float centerGlow = exp(-pow((xPos - 0.5) * 2.2, 2.0)) * verticalFade2;
+    col += vec3(0.95, 0.62, 0.28) * centerGlow * 0.32;
+
+    float vignette = 1.0 - pow(length(uv - vec2(0.5 * iResolution.x / iResolution.y, 0.5)) * 0.75, 2.0);
+    col *= max(vignette, 0.45);
+    col = pow(col, vec3(0.88));
+
     gl_FragColor = vec4(col, 1.0);
   }
 `;
 
 export function FinalCTA(): ReactNode {
   const containerRef = useRef<HTMLDivElement>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const frameIdRef = useRef<number>(0);
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
 
   useEffect(() => {
     if (!containerRef.current) return;
-
     const container = containerRef.current;
     const width = container.clientWidth;
     const height = container.clientHeight;
 
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
-    rendererRef.current = renderer;
 
     const uniforms = {
       iTime: { value: 0 },
       iResolution: { value: new THREE.Vector2(width, height) },
-      isDark: { value: isDark ? 1.0 : 0.0 },
     };
-
-    const material = new THREE.ShaderMaterial({
-      vertexShader,
-      fragmentShader,
-      uniforms,
-    });
-
+    const material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, uniforms });
     const geometry = new THREE.PlaneGeometry(2, 2);
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
     const startTime = Date.now();
     function animate() {
-      uniforms.iTime.value = (Date.now() - startTime) / 1000;
+      uniforms.iTime.value = (Date.now() - startTime) * 0.001;
       renderer.render(scene, camera);
       frameIdRef.current = requestAnimationFrame(animate);
     }
@@ -211,8 +171,8 @@ export function FinalCTA(): ReactNode {
     window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(frameIdRef.current);
+      window.removeEventListener("resize", handleResize);
       renderer.dispose();
       geometry.dispose();
       material.dispose();
@@ -220,40 +180,67 @@ export function FinalCTA(): ReactNode {
         container.removeChild(renderer.domElement);
       }
     };
-  }, [isDark]);
+  }, []);
 
   return (
-    <section className="relative w-full min-h-[20vh] flex items-center justify-center overflow-hidden">
+    <section className="relative w-full overflow-hidden bg-brand-900 py-24 sm:py-32 lg:py-40">
+      {/* Animated aurora — same shader as Hero */}
       <div
         ref={containerRef}
         className="absolute inset-0 z-0"
         aria-hidden="true"
       />
-      <div className="relative z-10 mx-auto max-w-4xl px-6 sm:px-8 py-24 sm:py-32 text-center">
+
+      {/* Paper grain — same as Hero */}
+      <svg
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 w-full h-full opacity-[0.06] mix-blend-overlay z-0"
+      >
+        <filter id="cta-grain">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#cta-grain)" />
+      </svg>
+
+      <div className="relative z-10 mx-auto  px-6 sm:px-8 text-center">
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease }}
-          className="text-4xl md:text-5xl max-w-md mx-auto font-medium font-serif text-foreground leading-tight"
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease }}
+          className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.0] tracking-tight text-white"
         >
-          Start your financial journey today
+          Klaar om je boekhouding 
+          <br />
+          <em>los te laten?</em>
         </motion.h2>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2, ease }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.2, ease }}
+          className="mt-6 text-lg lg:text-xl text-white/75 max-w-md mx-auto leading-relaxed"
+        >
+          We regelen de overstap, jij merkt er niks van. Plan een gratis kennismaking, dan kijken we wat past.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.4, ease }}
           className="mt-10"
         >
           <a
-            href="#"
-            className="inline-flex items-center px-8 py-4 bg-foreground text-background rounded-full text-sm font-medium hover:bg-foreground/90 active:scale-[0.97] transition-all duration-150"
+            href="/contact"
+            className="group inline-flex items-center gap-2 h-12 px-7 text-sm font-medium bg-background text-foreground rounded-full text-sm font-medium w-fit hover:bg-foreground/90 transition-colors"
           >
-            Get started free
+            Plan kennismaking
           </a>
         </motion.div>
+
+    
       </div>
     </section>
   );

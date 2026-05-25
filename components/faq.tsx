@@ -89,7 +89,7 @@ export function FAQ(): ReactNode {
           >
             <p className="text-foreground/60">Staat je vraag er niet bij?</p>
             <a
-              href="#contact"
+              href="/contact"
               className="group inline-flex items-center gap-2 text-foreground font-medium hover:opacity-70 transition-opacity"
             >
               Neem contact op
