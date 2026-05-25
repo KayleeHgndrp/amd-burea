@@ -65,7 +65,7 @@ function CTAs(): ReactNode {
   return (
     <div className="flex flex-col sm:flex-row gap-3">
       <a
-        href="#contact"
+        href="/contact"
         className="h-12 px-7 text-sm font-medium bg-white text-brand-900 rounded-full hover:bg-warm-50 active:scale-[0.97] transition-all duration-150 inline-flex items-center justify-center whitespace-nowrap"
       >
         Plan kennismaking

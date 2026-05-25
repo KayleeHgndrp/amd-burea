@@ -77,14 +77,14 @@ export function Principles(): ReactNode {
             </motion.p>
 
             <motion.a
-              href="#"
+              href="/contact"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3, ease }}
               className="group inline-flex items-center gap-2 mt-8 px-6 py-3 bg-foreground text-background rounded-full text-sm font-medium w-fit hover:bg-foreground/90 transition-colors"
             >
-              Plan een afspraak
+              Plan kennismaking
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </motion.a>
           </div>
