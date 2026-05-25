@@ -3,40 +3,40 @@
 import { type ReactNode } from "react";
 
 const footerLinks = {
-  product: {
-    title: "Product",
+  diensten: {
+    title: "Diensten",
     links: [
-      { label: "Personal", href: "#personal" },
-      { label: "Business", href: "#business" },
-      { label: "Cards", href: "#cards" },
-      { label: "Transfers", href: "#transfers" },
+      { label: "Boekhouding", href: "/boekhouding" },
+      { label: "Aangiften", href: "/aangiften" },
+      { label: "Advies", href: "/advies" },
+      { label: "Pakketten", href: "/pakketten" },
     ],
   },
-  company: {
-    title: "Company",
+  bedrijf: {
+    title: "Bedrijf",
     links: [
-      { label: "About us", href: "#about" },
-      { label: "Careers", href: "#careers" },
-      { label: "Press", href: "#press" },
-      { label: "Security", href: "#security" },
+      { label: "Over ons", href: "/over-ons" },
+      { label: "Team", href: "/team" },
+      { label: "Contact", href: "/contact" },
     ],
   },
-  resources: {
-    title: "Resources",
+  hulp: {
+    title: "Hulp",
     links: [
-      { label: "Help Center", href: "#help" },
-      { label: "Developer API", href: "#api" },
-      { label: "Blog", href: "#blog" },
-      { label: "Community", href: "#community" },
+      { label: "Veelgestelde vragen", href: "/faq" },
+      { label: "Plan kennismaking", href: "/kennismaking" },
+      { label: "Klantportaal", href: "/login" },
     ],
   },
 };
 
 const legalLinks = [
-  { label: "Privacy Policy", href: "#privacy" },
-  { label: "Terms of Service", href: "#terms" },
-  { label: "Cookie Policy", href: "#cookies" },
+  { label: "Privacyverklaring", href: "/privacy" },
+  { label: "Algemene voorwaarden", href: "/voorwaarden" },
+  { label: "Cookie-instellingen", href: "/cookies" },
 ];
+
+const year = new Date().getFullYear();
 
 export function Footer(): ReactNode {
   return (
@@ -60,14 +60,20 @@ export function Footer(): ReactNode {
           <div className="relative w-full px-8 sm:px-12 py-12">
             <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-8">
               <div className="lg:max-w-xs">
-                <a href="#" className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-full bg-foreground" />
+                <a href="/" className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-[#0E1B33]" />
                   <span className="text-lg font-semibold text-foreground">
                     AMD Bureau
                   </span>
                 </a>
-                <p className="mt-4 text-sm text-foreground/50 max-w-xs">
-                  © 2026 AMD Bureau.
+                <p className="mt-4 text-sm text-foreground/60 leading-relaxed max-w-xs">
+                  Persoonlijke boekhouder voor ZZP'ers en MKB. Vaste prijs, eigen contactpersoon, klare taal.
+                </p>
+                <p className="mt-4 text-xs text-foreground/50">
+                  KvK: 00000000
+                </p>
+                <p className="mt-1 text-xs text-foreground/50">
+                  © {year} AMD Bureau. Alle rechten voorbehouden.
                 </p>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 lg:gap-16">
@@ -101,10 +107,10 @@ export function Footer(): ReactNode {
           <div className="pt-8 px-8 sm:px-12">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <a
-                href="#"
+                href="/contact"
                 className="text-sm text-foreground/70 hover:text-foreground transition-colors"
               >
-                Contact us
+                Neem contact op
               </a>
               <div className="flex flex-wrap gap-6">
                 {legalLinks.map((link) => (
