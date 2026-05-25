@@ -13,6 +13,7 @@ type PricingPlan = {
   description: string;
   price: { zzp: string; mkb: string };
   features: string[];
+  contract: string;
   cta: string;
   featured?: boolean;
 };
@@ -31,7 +32,7 @@ const plans: PricingPlan[] = [
       "1× per jaar coachgesprek",
       "E-mailondersteuning",
     ],
-  
+    contract: "Minimaal 2 jaar",
     cta: "Kies Growth",
   },
   {
@@ -46,7 +47,7 @@ const plans: PricingPlan[] = [
       "Wij vragen je bonnen achterna",
       "Extra uitleg waar nodig",
     ],
-
+    contract: "Minimaal 1 jaar",
     cta: "Kies Pro",
     featured: true,
   },
@@ -65,7 +66,7 @@ const plans: PricingPlan[] = [
       "Bankkoppeling regelen",
       "Inzicht in dossier 24/7",
     ],
-
+    contract: "Minimaal 1 jaar",
     cta: "Kies Premium",
   },
 ];
@@ -186,7 +187,9 @@ function PricingCard({
         <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
       </a>
 
-    
+      <p className="text-xs text-muted-foreground mt-4 text-center">
+        Contract: {plan.contract}
+      </p>
     </motion.div>
   );
 }
