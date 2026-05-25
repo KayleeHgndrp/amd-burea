@@ -14,6 +14,13 @@ export const siteConfig = {
     "Persoonlijke boekhouder voor ZZP'ers en MKB. Vaste prijs, eigen contactpersoon, klare taal.",
   url: "https://amd-bureau.nl",
   twitter: "@amd-bureau",
+  street: "Laan van Norfolk 7",
+  city: "Hoofddorp",
+  zipCode: "2135 XD",
+  country: "Nederland",
+
+  /** Google Tag Manager container ID (of NEXT_PUBLIC_GTM_ID) */
+  gtmId: process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-KH35MC98",
 
   contact: {
     email: "info@amd-bureau.nl",
