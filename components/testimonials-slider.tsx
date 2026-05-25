@@ -34,27 +34,7 @@ const testimonials: Testimonial[] = [
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face",
     linkedIn: "#",
   },
-  {
-    name: "Emily Rodriguez",
-    role: "Treasury Director",
-    company: "Global Dynamics",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&crop=face",
-    linkedIn: "#",
-  },
-  {
-    name: "James Wright",
-    role: "VP of Operations",
-    company: "Summit Capital",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face",
-    linkedIn: "#",
-  },
-  {
-    name: "Alexandra Kim",
-    role: "Finance Manager",
-    company: "Horizon Labs",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=face",
-    linkedIn: "#",
-  },
+
 ];
 
 function useVisibleCount() {
