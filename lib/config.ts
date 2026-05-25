@@ -3,43 +3,42 @@
  * SITE CONFIGURATION
  * ============================================================================
  *
- * Customize your landing page by editing the values below.
- * All text, links, and settings are centralized here for easy editing.
+ * Centrale plek voor bedrijfs- en sitegegevens. Pas hier naam, contact en
+ * URL aan; componenten en metadata lezen deze waarden.
  */
 
 export const siteConfig = {
-  name: "Finaro",
-  tagline: "Modern Banking for Modern Business",
+  name: "AMD Bureau",
+  tagline: "Persoonlijke boekhouder voor ZZP'ers en MKB",
   description:
-    "The financial platform that grows with you. From personal accounts to enterprise solutions, manage your money with confidence.",
-  url: "https://finaro.com",
-  twitter: "@finaro",
+    "Persoonlijke boekhouder voor ZZP'ers en MKB. Vaste prijs, eigen contactpersoon, klare taal.",
+  url: "https://amd-bureau.nl",
+  twitter: "@amd-bureau",
 
-  nav: {
-    cta: {
-      text: "Get Started",
-      href: "#",
+  contact: {
+    email: "info@amd-bureau.nl",
+    kvk: "00000000",
+    phone: {
+      /** E.164-formaat voor tel:-links */
+      tel: "+31201234567",
+      /** Weergave op de site */
+      display: "020 123 45 67",
     },
-    signIn: {
-      text: "Sign in",
-      href: "#",
-    },
+    hours: "Ma-Vr, 9:00 tot 17:30",
   },
+
+
 } as const;
 
-
-
-
-
-
-
+export const contactLinks = {
+  tel: `tel:${siteConfig.contact.phone.tel}`,
+  mailto: `mailto:${siteConfig.contact.email}`,
+} as const;
 
 /**
  * ============================================================================
  * FEATURE FLAGS
  * ============================================================================
- *
- * Toggle features on/off without touching component code.
  */
 export const features = {
   smoothScroll: true,
@@ -53,9 +52,6 @@ export const features = {
  * ============================================================================
  * THEME CONFIGURATION
  * ============================================================================
- *
- * Colors are defined in globals.css using CSS custom properties.
- * This config controls which theme features are enabled.
  */
 export const themeConfig = {
   defaultTheme: "system" as "light" | "dark" | "system",

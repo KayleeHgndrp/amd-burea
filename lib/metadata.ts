@@ -1,34 +1,35 @@
 import type { Metadata } from "next";
+import { siteConfig as config } from "@/lib/config";
 
 export const year = new Date().getFullYear();
 
-export const copyright = `© ${year} AMD Bureau.`;
+export const copyright = `© ${year} ${config.name}.`;
 
-export const siteName = "AMD Bureau";
-export const siteURL = "https://amd-bureau.nl";
+export const siteName = config.name;
+export const siteURL = config.url;
 
 export const siteConfig = {
-  name: siteName,
-  description:
-    "The modern financial platform that grows with you. From personal accounts to enterprise solutions, manage your money with confidence.",
-  url: siteURL,
+  name: config.name,
+  description: config.description,
+  url: config.url,
   ogImage: "/og-image.png",
-  creator: "@amd-bureau",
+  creator: config.twitter,
   authors: [
     {
-      name: siteName,
-      url: siteURL,
+      name: config.name,
+      url: config.url,
     },
   ],
   keywords: [
-    "banking",
-    "finance",
-    "fintech",
-    "payments",
-    "business banking",
-    "money transfer",
-    "financial platform",
-    "modern banking",
+    "boekhouder",
+    "boekhouding",
+    "ZZP",
+    "MKB",
+    "BTW-aangifte",
+    "inkomstenbelasting",
+    "salarisadministratie",
+    "financieel advies",
+    "AMD Bureau",
   ],
 } as const;
 
@@ -59,7 +60,7 @@ export const baseMetadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "nl_NL",
     url: siteConfig.url,
     title: siteConfig.name,
     description: siteConfig.description,

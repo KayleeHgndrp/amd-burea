@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useState, type ReactNode } from "react";
+import { siteConfig } from "@/lib/config";
 
 type NavItem = {
   label: string;
@@ -74,7 +75,7 @@ export function Header(): ReactNode {
           <motion.a
             href="/"
             className="flex items-center gap-2"
-            aria-label="AMD Bureau home"
+            aria-label={`${siteConfig.name} home`}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1, ease }}
@@ -83,7 +84,7 @@ export function Header(): ReactNode {
               className="w-6 h-6 rounded-full bg-white"
               aria-hidden="true"
             />
-            <span className="text-lg font-semibold text-white">AMD Bureau</span>
+            <span className="text-lg font-semibold text-white">{siteConfig.name}</span>
           </motion.a>
 
           <motion.nav
@@ -126,7 +127,7 @@ export function Header(): ReactNode {
           <motion.a
             href="/"
             className="flex items-center gap-2"
-            aria-label="AMD Bureau home"
+            aria-label={`${siteConfig.name} home`}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1, ease }}
@@ -135,7 +136,7 @@ export function Header(): ReactNode {
               className="w-6 h-6 rounded-full bg-white"
               aria-hidden="true"
             />
-            <span className="text-lg font-semibold text-white">AMD Bureau</span>
+            <span className="text-lg font-semibold text-white">{siteConfig.name}</span>
           </motion.a>
           <motion.button
             className="p-2 -mr-2"
@@ -164,7 +165,7 @@ export function Header(): ReactNode {
               <a
                 href="/"
                 className="flex items-center gap-2"
-                aria-label="AMD Bureau home"
+                aria-label={`${siteConfig.name} home`}
                 onClick={closeMobileMenu}
               >
                 <div
@@ -172,7 +173,7 @@ export function Header(): ReactNode {
                   aria-hidden="true"
                 />
                 <span className="text-lg font-semibold text-foreground">
-                  AMD Bureau
+                  {siteConfig.name}
                 </span>
               </a>
               <button

@@ -10,6 +10,7 @@ import {
   Shield,
 } from "lucide-react";
 import { motion } from "motion/react";
+import { siteConfig } from "@/lib/config";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -51,7 +52,7 @@ export function Principles(): ReactNode {
               className="flex items-center gap-2 mb-6"
             >
               <Sparkles className="w-4 h-4" />
-              <span className="text-sm font-medium">Waarom AMD Bureau?</span>
+              <span className="text-sm font-medium">Waarom {siteConfig.name}?</span>
             </motion.div>
 
             <motion.h2

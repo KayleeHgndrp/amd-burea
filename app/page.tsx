@@ -10,12 +10,13 @@ import { Principles } from "@/components/principles";
 import { Services } from "@/components/services";
 import { Stats } from "@/components/stats";
 import { TestimonialsSlider } from "@/components/testimonials-slider";
-import { createMetadata, siteConfig } from "@/lib/metadata";
+import { siteConfig } from "@/lib/config";
+import { createMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = createMetadata({
-  title: `${siteConfig.name} - Modern Banking for Modern Business`,
+  title: `${siteConfig.name} - ${siteConfig.tagline}`,
   description: siteConfig.description,
   path: "/",
 });

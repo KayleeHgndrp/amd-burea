@@ -3,6 +3,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { motion } from "motion/react";
 import * as THREE from "three";
+import { DeadlineCard } from "./deadline-card";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -74,21 +75,6 @@ function CTAs(): ReactNode {
   );
 }
 
-function DeadlineCard({ className = "" }: { className?: string }): ReactNode {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: 16, y: -8 }}
-      animate={{ opacity: 1, x: 0, y: 0 }}
-      transition={{ duration: 0.7, delay: 1.2, ease }}
-      className={`bg-brand-900/95 backdrop-blur-md text-white rounded-2xl px-4 py-3 shadow-xl border border-white/10 ${className}`}
-    >
-      <div className="text-[10px] uppercase tracking-[0.12em] text-white/55 font-medium">
-        Volgende deadline
-      </div>
-      <div className="font-serif text-lg mt-0.5">BTW Q2 · 31 jul</div>
-    </motion.div>
-  );
-}
 
 function TestimonialCard({ className = "" }: { className?: string }): ReactNode {
   return (

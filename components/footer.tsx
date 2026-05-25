@@ -1,31 +1,24 @@
 "use client";
 
 import { type ReactNode } from "react";
+import { siteConfig } from "@/lib/config";
 
 const footerLinks = {
   diensten: {
     title: "Diensten",
     links: [
-      { label: "Boekhouding", href: "/boekhouding" },
-      { label: "Aangiften", href: "/aangiften" },
-      { label: "Advies", href: "/advies" },
-      { label: "Pakketten", href: "/pakketten" },
+      { label: "Boekhouding", href: "/#diensten" },
+      { label: "Aangiften", href: "/#diensten" },
+      { label: "Advies", href: "/#diensten" },
+      { label: "Pakketten", href: "/#pakketten" },
     ],
   },
-  bedrijf: {
-    title: "Bedrijf",
-    links: [
-      { label: "Over ons", href: "/over-ons" },
-      { label: "Team", href: "/team" },
-      { label: "Contact", href: "/contact" },
-    ],
-  },
+
   hulp: {
     title: "Hulp",
     links: [
-      { label: "Veelgestelde vragen", href: "/faq" },
-      { label: "Plan kennismaking", href: "/kennismaking" },
-      { label: "Klantportaal", href: "/login" },
+      { label: "Veelgestelde vragen", href: "/#veelgestelde-vragen" },
+      { label: "Plan kennismaking", href: "/contact" },
     ],
   },
 };
@@ -62,17 +55,17 @@ export function Footer(): ReactNode {
                 <a href="/" className="flex items-center gap-2">
                   <div className="w-6 h-6 rounded-full bg-[#0E1B33]" />
                   <span className="text-lg font-semibold text-foreground">
-                    AMD Bureau
+                    {siteConfig.name}
                   </span>
                 </a>
                 <p className="mt-4 text-sm text-foreground/60 leading-relaxed max-w-xs">
-                  Persoonlijke boekhouder voor ZZP'ers en MKB. Vaste prijs, eigen contactpersoon, klare taal.
+                  {siteConfig.description}
                 </p>
                 <p className="mt-4 text-xs text-foreground/50">
-                  KvK: 00000000
+                  KvK: {siteConfig.contact.kvk}
                 </p>
                 <p className="mt-1 text-xs text-foreground/50">
-                  © {year} AMD Bureau. Alle rechten voorbehouden.
+                  © {year} {siteConfig.name}. Alle rechten voorbehouden.
                 </p>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 lg:gap-16">

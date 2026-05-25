@@ -3,6 +3,7 @@
 import { useState, type FormEvent, type ReactNode } from "react";
 import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
+import { contactLinks, siteConfig } from "@/lib/config";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -240,42 +241,34 @@ export function Contact(): ReactNode {
               </h2>
               <div className="flex flex-col gap-4">
                 <a
-                  href="tel:+31201234567"
+                  href={contactLinks.tel}
                   className="flex items-start gap-3 group"
                 >
                   <Phone className="w-5 h-5 text-foreground/60 shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
                     <div className="text-sm font-medium text-foreground group-hover:text-[#0E1B33] transition-colors">
-                      020 123 45 67
+                      {siteConfig.contact.phone.display}
                     </div>
                     <div className="text-xs text-foreground/55 mt-0.5">
-                      Ma-Vr, 9:00 tot 17:30
+                      {siteConfig.contact.hours}
                     </div>
                   </div>
                 </a>
                 <a
-                  href="mailto:info@amd-bureau.nl"
+                  href={contactLinks.mailto}
                   className="flex items-start gap-3 group"
                 >
                   <Mail className="w-5 h-5 text-foreground/60 shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
                     <div className="text-sm font-medium text-foreground group-hover:text-[#0E1B33] transition-colors">
-                      info@amd-bureau.nl
+                      {siteConfig.contact.email}
                     </div>
                     <div className="text-xs text-foreground/55 mt-0.5">
                       Antwoord binnen 24 uur
                     </div>
                   </div>
                 </a>
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-foreground/60 shrink-0 mt-0.5" aria-hidden="true" />
-                  <div>
-                    <div className="text-sm font-medium text-foreground">Bezoekadres</div>
-                    <div className="text-xs text-foreground/55 mt-0.5">
-                      Straatnaam 00, 1000 AB Amsterdam
-                    </div>
-                  </div>
-                </div>
+         
               </div>
             </div>
 

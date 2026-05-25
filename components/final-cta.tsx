@@ -4,6 +4,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { motion } from "motion/react";
 import * as THREE from "three";
 import { ArrowRight } from "lucide-react";
+import { contactLinks, siteConfig } from "@/lib/config";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -241,10 +242,10 @@ export function FinalCTA(): ReactNode {
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </a>
           <a
-            href="tel:+31612345678"
+            href={contactLinks.tel}
             className="inline-flex items-center justify-center gap-2 h-12 px-7 text-sm font-medium border border-white/25 text-white rounded-full hover:bg-white/10 active:scale-[0.97] transition-all duration-150 whitespace-nowrap"
           >
-            Bel direct op 06 12345678
+            Bel direct op {siteConfig.contact.phone.display}
           </a>
         </motion.div>
       </div>
