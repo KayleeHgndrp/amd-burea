@@ -1,7 +1,7 @@
 "use client";
 
 import { type ReactNode } from "react";
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { motion } from "motion/react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
