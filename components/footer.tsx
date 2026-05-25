@@ -63,11 +63,11 @@ export function Footer(): ReactNode {
                 <a href="#" className="flex items-center gap-2">
                   <div className="w-6 h-6 rounded-full bg-foreground" />
                   <span className="text-lg font-semibold text-foreground">
-                    finaro
+                    AMD Bureau
                   </span>
                 </a>
                 <p className="mt-4 text-sm text-foreground/50 max-w-xs">
-                  © 2026 Finaro Inc. Modern banking for individuals and businesses.
+                  © 2026 AMD Bureau.
                 </p>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 lg:gap-16">

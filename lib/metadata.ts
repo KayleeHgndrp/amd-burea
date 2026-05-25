@@ -1,16 +1,23 @@
 import type { Metadata } from "next";
 
+export const year = new Date().getFullYear();
+
+export const copyright = `© ${year} AMD Bureau.`;
+
+export const siteName = "AMD Bureau";
+export const siteURL = "https://amd-bureau.nl";
+
 export const siteConfig = {
-  name: "React Bits Pro - Finance Template",
+  name: siteName,
   description:
     "The modern financial platform that grows with you. From personal accounts to enterprise solutions, manage your money with confidence.",
-  url: "https://finaro.com",
+  url: siteURL,
   ogImage: "/og-image.png",
-  creator: "@finaro",
+  creator: "@amd-bureau",
   authors: [
     {
-      name: "Finaro",
-      url: "https://finaro.com",
+      name: siteName,
+      url: siteURL,
     },
   ],
   keywords: [

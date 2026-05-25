@@ -51,7 +51,7 @@ export const trustedByConfig = {
 } as const;
 
 export const featureCardsConfig = {
-  title: "The new standard",
+  title: "Eén kantoor voor al je administratie en advies.",
   subtitle: "for modern banking",
 } as const;
 

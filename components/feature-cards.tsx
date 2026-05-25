@@ -1,47 +1,47 @@
 "use client";
 
 import { type ReactNode } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { motion } from "motion/react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-type FeatureCard = {
+type Feature = {
   title: string;
   description: string;
   href: string;
-  visual: "comparison" | "chart" | "code";
+  visual: "comparison" | "deadlines" | "advies";
 };
 
-const features: FeatureCard[] = [
+const features: Feature[] = [
   {
-    title: "Send money globally. Instantly.",
+    title: "Je boekhouding altijd op orde.",
     description:
-      "Transfer funds to 160+ countries with the real exchange rate. No hidden fees, no waiting—your money arrives in seconds.",
-    href: "#",
+      "Facturen, bonnen en banktransacties verwerken wij. Je administratie loopt op de achtergrond, zonder dat jij er omkijken naar hebt.",
+    href: "#boekhouding",
     visual: "comparison",
   },
   {
-    title: "Earn more on your savings.",
+    title: "Aangiften op tijd ingediend.",
     description:
-      "Get up to 4.5% APY on your balance with no lock-in period. Your money works harder while staying instantly accessible.",
-    href: "#",
-    visual: "chart",
+      "BTW elk kwartaal, IB aan het eind van het jaar. Wij bewaken de deadlines en regelen het. Jij ondertekent met één klik.",
+    href: "#aangiften",
+    visual: "deadlines",
   },
   {
-    title: "Build with our developer API.",
+    title: "Een sparringspartner, geen verwerker.",
     description:
-      "Access real-time payment data and automate your finances with our REST API. Full documentation and SDKs included.",
-    href: "#",
-    visual: "code",
+      "Vragen over tarieven, aftrekposten of bedrijfsvorm? Bel of mail je vaste contactpersoon. Reactie binnen 24 uur, altijd in begrijpelijke taal.",
+    href: "#advies",
+    visual: "advies",
   },
 ];
 
 function ComparisonVisual(): ReactNode {
   const rows = [
-    { name: "finaro", speed: "Instant", fees: "$0", highlight: true },
-    { name: "Bank", speed: "3-5 days", fees: "$25-50", highlight: false },
-    { name: "Wire", speed: "1-2 days", fees: "$15-35", highlight: false },
+    { name: "Met ons", time: "0u/mnd", risk: "0%", highlight: true },
+    { name: "Boekhoudtool", time: "3u/mnd", risk: "Eigen risico", highlight: false },
+    { name: "Zelf doen", time: "8u/mnd", risk: "Hoog", highlight: false },
   ];
 
   return (
@@ -49,8 +49,8 @@ function ComparisonVisual(): ReactNode {
       <div className="w-full max-w-xs">
         <div className="grid grid-cols-3 text-xs text-muted-foreground pb-2 border-b border-border">
           <div />
-          <div className="text-center">Speed</div>
-          <div className="text-center">Fees</div>
+          <div className="text-center">Tijd/mnd</div>
+          <div className="text-center">Foutmarge</div>
         </div>
         {rows.map((row, i) => (
           <motion.div
@@ -59,14 +59,22 @@ function ComparisonVisual(): ReactNode {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: i * 0.1, ease }}
-            className={`grid grid-cols-3 py-3 text-sm ${i < rows.length - 1 ? "border-b border-border" : ""} ${row.highlight ? "" : "text-muted-foreground"}`}
+            className={`grid grid-cols-3 py-3 text-sm ${
+              i < rows.length - 1 ? "border-b border-border" : ""
+            } ${row.highlight ? "" : "text-muted-foreground"}`}
           >
             <div className={row.highlight ? "flex items-center gap-2" : ""}>
               {row.highlight && <div className="w-4 h-4 rounded-full bg-foreground" />}
-              <span className={row.highlight ? "text-foreground font-medium" : ""}>{row.name}</span>
+              <span className={row.highlight ? "text-foreground font-medium" : ""}>
+                {row.name}
+              </span>
             </div>
-            <div className={`text-center ${row.highlight ? "text-accent" : ""}`}>{row.speed}</div>
-            <div className={`text-center ${row.highlight ? "text-accent" : ""}`}>{row.fees}</div>
+            <div className={`text-center ${row.highlight ? "text-accent" : ""}`}>
+              {row.time}
+            </div>
+            <div className={`text-center ${row.highlight ? "text-accent" : ""}`}>
+              {row.risk}
+            </div>
           </motion.div>
         ))}
       </div>
@@ -74,73 +82,115 @@ function ComparisonVisual(): ReactNode {
   );
 }
 
-function ChartVisual(): ReactNode {
+function DeadlinesVisual(): ReactNode {
+  const items = [
+    { label: "BTW Q4 2025", date: "31 jan", status: "done" as const },
+    { label: "IB 2025", date: "28 feb", status: "done" as const },
+    { label: "BTW Q1 2026", date: "30 apr", status: "done" as const },
+    { label: "BTW Q2 2026", date: "31 jul", status: "next" as const },
+    { label: "BTW Q3 2026", date: "31 okt", status: "upcoming" as const },
+  ];
+
   return (
-    <div className="w-full h-full flex items-center justify-center p-8 sm:p-6">
-      <div className="relative w-full max-w-xs">
-        <div className="mb-3">
-          <div className="text-xs text-muted-foreground">Current APY</div>
-          <div className="text-xl sm:text-2xl font-semibold text-accent">4.50%</div>
-        </div>
-        <div className="flex items-end justify-between gap-2 h-24 sm:h-32">
-          {[0.3, 0.45, 0.55, 0.5, 0.65, 0.7, 0.75, 0.85, 0.9, 1].map(
-            (height, i) => (
-              <motion.div
-                key={i}
-                className="flex-1 bg-linear-to-t from-accent/80 to-accent/40 rounded-t origin-bottom"
-                initial={{ scaleY: 0 }}
-                whileInView={{ scaleY: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.05, ease }}
-                style={{ height: `${height * 100}%` }}
-              />
-            )
-          )}
-        </div>
-        <div className="flex items-center justify-end gap-1 mt-3">
-          <span className="text-xs text-muted-foreground">vs avg savings</span>
-          <span className="text-xs text-accent">0.5%</span>
+    <div className="w-full h-full flex items-center justify-center p-6">
+      <div className="w-full max-w-xs">
+        <div className="text-xs text-muted-foreground mb-3">Belastingjaar 2026</div>
+        <div className="flex flex-col gap-1.5">
+          {items.map((item, i) => (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, x: -8 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: i * 0.08, ease }}
+              className={`flex items-center justify-between text-sm py-1 ${
+                item.status === "upcoming" ? "text-muted-foreground/60" : ""
+              }`}
+            >
+              <div className="flex items-center gap-2.5 min-w-0">
+                {item.status === "done" && (
+                  <div className="shrink-0 w-4 h-4 rounded-full bg-foreground flex items-center justify-center">
+                    <Check className="w-2.5 h-2.5 text-background" strokeWidth={3} />
+                  </div>
+                )}
+                {item.status === "next" && (
+                  <div className="shrink-0 w-4 h-4 rounded-full bg-accent flex items-center justify-center ring-4 ring-accent/15">
+                    <div className="w-1.5 h-1.5 rounded-full bg-background" />
+                  </div>
+                )}
+                {item.status === "upcoming" && (
+                  <div className="shrink-0 w-4 h-4 rounded-full border border-border" />
+                )}
+                <span
+                  className={
+                    item.status === "next"
+                      ? "text-foreground font-medium truncate"
+                      : "truncate"
+                  }
+                >
+                  {item.label}
+                </span>
+              </div>
+              <div
+                className={`text-xs shrink-0 ml-2 ${
+                  item.status === "next" ? "text-accent font-medium" : "text-muted-foreground"
+                }`}
+              >
+                {item.date}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </div>
   );
 }
 
-function CodeVisual(): ReactNode {
-  const codeLines = [
-    { text: "--data '{", style: "text-muted-foreground" },
-    { text: "  'account-balance'", style: "text-accent" },
-    { text: "  'portfolio-value'", style: "text-accent" },
-    { text: "  'transaction-history'", style: "text-accent" },
-    { text: "  'pending-transfers'", style: "text-accent" },
-    { text: "  'card-details'", style: "text-accent" },
-    { text: "  'exchange-rates'", style: "text-accent" },
-    { text: "}'", style: "text-muted-foreground" },
+function AdviesVisual(): ReactNode {
+  const messages = [
+    { from: "you" as const, text: "Kan ik mijn iPad aftrekken?" },
+    { from: "boekhouder" as const, text: "Ja, mits ≥10% zakelijk. Boek 'm op 'Gereedschap'." },
   ];
 
   return (
-    <div className="w-full h-full flex items-center justify-start p-6 overflow-hidden">
-      <pre className="text-xs sm:text-sm font-mono leading-relaxed">
-        <code>
-          {codeLines.map((line, i) => (
-            <motion.span
-              key={i}
-              className={`block ${line.style}`}
-              initial={{ opacity: 0, x: -8 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: i * 0.05, ease }}
+    <div className="w-full h-full flex items-center justify-center p-6">
+      <div className="w-full max-w-xs flex flex-col gap-2">
+        {messages.map((msg, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: i * 0.2, ease }}
+            className={`flex ${msg.from === "you" ? "justify-end" : "justify-start"}`}
+          >
+            <div
+              className={`max-w-[85%] px-3.5 py-2 rounded-2xl text-xs sm:text-sm leading-snug ${
+                msg.from === "you"
+                  ? "bg-foreground text-background rounded-br-md"
+                  : "bg-muted text-foreground rounded-bl-md border border-border"
+              }`}
             >
-              {line.text}
-            </motion.span>
-          ))}
-        </code>
-      </pre>
+              {msg.text}
+            </div>
+          </motion.div>
+        ))}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.6, ease }}
+          className="flex items-center gap-2 mt-2 text-xs text-muted-foreground"
+        >
+          <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+          Reactie in 1u 12m · vanochtend
+        </motion.div>
+      </div>
     </div>
   );
 }
 
-function FeatureCard({ card, index }: { card: FeatureCard; index: number }): ReactNode {
+function FeatureCard({ card, index }: { card: Feature; index: number }): ReactNode {
   return (
     <motion.a
       href={card.href}
@@ -149,20 +199,22 @@ function FeatureCard({ card, index }: { card: FeatureCard; index: number }): Rea
       whileHover={{ y: -4 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6, delay: index * 0.1, ease }}
-      className="group flex flex-col bg-muted/50 border border-border rounded-sm overflow-hidden hover:border-foreground/20 hover:shadow-lg transition-[border-color,box-shadow]"
+      className="group flex flex-col bg-muted/50 border border-border rounded-2xl overflow-hidden hover:border-foreground/20 hover:shadow-lg transition-[border-color,box-shadow]"
     >
       <div className="relative h-56 sm:h-64 bg-background">
         {card.visual === "comparison" && <ComparisonVisual />}
-        {card.visual === "chart" && <ChartVisual />}
-        {card.visual === "code" && <CodeVisual />}
+        {card.visual === "deadlines" && <DeadlinesVisual />}
+        {card.visual === "advies" && <AdviesVisual />}
       </div>
       <div className="flex flex-col p-6">
-        <h3 className="text-lg font-medium font-serif text-foreground">{card.title}</h3>
+        <h3 className="text-lg font-medium font-display text-foreground">
+          {card.title}
+        </h3>
         <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
           {card.description}
         </p>
         <div className="flex items-center gap-1 mt-4 text-sm font-medium text-foreground/80 group-hover:text-foreground transition-colors">
-          Learn more
+          Meer weten
           <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
         </div>
       </div>
@@ -180,11 +232,11 @@ export function FeatureCards(): ReactNode {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1, ease }}
-            className="text-3xl sm:text-4xl md:text-5xl font-medium font-serif text-foreground"
+            className="text-3xl sm:text-4xl md:text-5xl font-medium font-serif text-foreground max-w-2xl leading-[1.1]"
           >
-            The new standard
+            Eén kantoor voor
             <br />
-            <span className="italic">for modern banking</span>
+            <span className="italic">al je administratie en advies</span>
           </motion.h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

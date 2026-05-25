@@ -13,10 +13,10 @@ type Stat = {
 };
 
 const stats: Stat[] = [
-  { value: 5, suffix: "B+", prefix: "$", label: "Processed annually" },
-  { value: 99.9, suffix: "%", label: "Uptime guarantee" },
-  { value: 150, suffix: "+", label: "Countries supported" },
-  { value: 2, suffix: "M+", label: "Active users" },
+  { value: 99, suffix: "+", prefix: "", label: "Tevreden klanten" },
+  { value: 20, suffix: "Jr", label: "In het vak" },
+  { value: 0, suffix: "%", label: "Foutmarge" },
+  { value: 100, suffix: "%", label: "Vertrouwen in ons" },
 ];
 
 function AnimatedCounter({

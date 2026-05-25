@@ -346,7 +346,7 @@ export function Header(): ReactNode {
               className="w-6 h-6 rounded-full bg-white"
               aria-hidden="true"
             />
-            <span className="text-lg font-semibold text-white">finaro</span>
+            <span className="text-lg font-semibold text-white">AMD Bureau</span>
           </motion.a>
 
           <motion.nav
@@ -389,14 +389,9 @@ export function Header(): ReactNode {
               href="#"
               className="px-5 py-2.5 text-sm font-semibold tracking-tighter text-black bg-white rounded-full hover:bg-white/90 transition-colors"
             >
-              Log in
+              Plan een afspraak
             </a>
-            <a
-              href="#"
-              className="px-5 py-2.5 text-sm font-semibold tracking-tighter text-white border border-white rounded-full hover:bg-white/10 transition-colors"
-            >
-              Sign up
-            </a>
+          
           </motion.div>
         </div>
       </header>

@@ -221,7 +221,7 @@ export function TestimonialsSlider(): ReactNode {
             transition={{ duration: 0.6, ease }}
             className="text-3xl sm:text-4xl lg:text-5xl font-medium font-serif leading-tight text-foreground text-center mb-16"
           >
-            Trusted by Finance Leaders
+            Maak kennis met ons team
           </motion.h2>
 
           <div className="relative">

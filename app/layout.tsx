@@ -45,7 +45,7 @@ export default function RootLayout({
         <Providers>
           <SkipToContent />
           <Header />
-          <ThemeSwitch />
+
           {children}
         </Providers>
       </body>

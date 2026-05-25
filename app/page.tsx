@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { Pricing } from "@/components/pricing";
 import { Principles } from "@/components/principles";
+import { Services } from "@/components/services";
 import { Stats } from "@/components/stats";
 import { TestimonialsSlider } from "@/components/testimonials-slider";
 import { TrustedBy } from "@/components/trusted-by";
@@ -25,11 +26,11 @@ export default function HomePage(): ReactNode {
     <>
       <main id="main-content" className="flex-1">
         <Hero />
-        <TrustedBy />
         <FeatureCards />
         <FeatureHighlight />
         <Principles />
-        <Stats />
+        <Stats /> 
+        <Services />
         <TestimonialsSlider />
         <Pricing />
         <FAQ />

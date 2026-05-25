@@ -8,8 +8,8 @@
   --muted: #f3f3ee;
   --muted-foreground: #737373;
   --border: #e5e5e5;
-  --ring: #0066ff;
-  --accent: #0066ff;
+  --ring: #0b1d3c;
+  --accent: #0b1d3c;
   --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }

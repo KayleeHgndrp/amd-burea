@@ -21,19 +21,19 @@ type PrincipleCard = {
 const principles: PrincipleCard[] = [
   {
     icon: <Landmark className="w-12 h-12" strokeWidth={1} />,
-    label: "Bank-grade Infrastructure",
+    label: "Vaste prijs, geen verrassingen",
   },
   {
     icon: <Shield className="w-12 h-12" strokeWidth={1} />,
-    label: "Regulated & Compliant",
+    label: "Persoonlijk, je bent geen nummer",
   },
   {
     icon: <CreditCard className="w-12 h-12" strokeWidth={1} />,
-    label: "Instant Card Controls",
+    label: "Op werkdagen binnen 24 uur antwoord",
   },
   {
     icon: <BarChart3 className="w-12 h-12" strokeWidth={1} />,
-    label: "Real-time Analytics",
+    label: "We nemen je problemen uit handen",
   },
 ];
 
@@ -51,7 +51,7 @@ export function Principles(): ReactNode {
               className="flex items-center gap-2 mb-6"
             >
               <Sparkles className="w-4 h-4" />
-              <span className="text-sm font-medium">Why Finaro?</span>
+              <span className="text-sm font-medium">Waarom AMD Bureau?</span>
             </motion.div>
 
             <motion.h2
@@ -61,8 +61,8 @@ export function Principles(): ReactNode {
               transition={{ duration: 0.6, delay: 0.1, ease }}
               className="text-3xl sm:text-4xl lg:text-5xl font-medium font-serif leading-tight"
             >
-              Modern banking with{" "}
-              <span className="italic">security at the core</span>
+              Boekhouding zoals{" "}
+              <span className="italic">het hoort.</span>
             </motion.h2>
 
             <motion.p
@@ -72,8 +72,7 @@ export function Principles(): ReactNode {
               transition={{ duration: 0.5, delay: 0.2, ease }}
               className="mt-6 text-foreground/70 leading-relaxed max-w-lg"
             >
-              From instant payments to global transfers, every feature is
-              designed to give you complete control over your finances.
+              We zijn opgericht door en voor ondernemers. Geen ingewikkeld jargon, geen anonieme tickets, gewoon vakwerk met een menselijk gezicht.
             </motion.p>
 
             <motion.a
@@ -84,7 +83,7 @@ export function Principles(): ReactNode {
               transition={{ duration: 0.5, delay: 0.3, ease }}
               className="group inline-flex items-center gap-2 mt-8 px-6 py-3 bg-foreground text-background rounded-full text-sm font-medium w-fit hover:bg-foreground/90 transition-colors"
             >
-              Open an account
+              Plan een afspraak
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </motion.a>
           </div>
