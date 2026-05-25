@@ -184,6 +184,41 @@ export async function getBlogArticles(
   return mapEntries(await getBlogEntries(options), mapBlogEntry);
 }
 
+export type BlogSitemapEntry = {
+  slug: string;
+  lastModified?: Date;
+};
+
+/** Alle gepubliceerde blogposts voor sitemap.xml. */
+export async function getBlogSitemapEntries(): Promise<BlogSitemapEntry[]> {
+  const entries: BlogSitemapEntry[] = [];
+
+  for await (const entry of iterateCollection("blogs")) {
+    if (!mapBlogEntry(entry)) continue;
+
+    const slug =
+      typeof entry.slug === "string" && entry.slug.length > 0
+        ? entry.slug
+        : typeof entry.id === "string" && entry.id.length > 0
+          ? entry.id
+          : null;
+    if (!slug) continue;
+
+    const raw = entry.updated_at ?? entry.published_at ?? entry.created_at;
+    const lastModified =
+      typeof raw === "string" ? new Date(raw) : undefined;
+
+    entries.push({
+      slug,
+      ...(lastModified && !Number.isNaN(lastModified.getTime())
+        ? { lastModified }
+        : {}),
+    });
+  }
+
+  return entries;
+}
+
 /** Teamleden, gemapt voor de UI. */
 export async function getTeamMembers(
   options?: CollectionEntriesOptions,
