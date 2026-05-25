@@ -3,6 +3,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { motion } from "motion/react";
 import * as THREE from "three";
+import { ArrowRight } from "lucide-react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -210,7 +211,7 @@ export function FinalCTA(): ReactNode {
           transition={{ duration: 0.8, ease }}
           className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.0] tracking-tight text-white"
         >
-          Klaar om je boekhouding 
+          Klaar om je boekhouding
           <br />
           <em>los te laten?</em>
         </motion.h2>
@@ -226,21 +227,30 @@ export function FinalCTA(): ReactNode {
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.4, ease }}
-          className="mt-10"
-        >
-          <a
-            href="/contact"
-            className="group inline-flex items-center gap-2 h-12 px-7 text-sm font-medium bg-background text-foreground rounded-full text-sm font-medium w-fit hover:bg-foreground/90 transition-colors"
-          >
-            Plan kennismaking
-          </a>
-        </motion.div>
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2, ease }}
+              className="mt-8 flex flex-col sm:flex-row gap-3"
+            >
+               <a
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 h-12 px-7 text-sm font-medium border border-border text-background rounded-full hover:bg-muted active:scale-[0.97] transition-all duration-150 whitespace-nowrap"
+              >
+                Plan kennismaking
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
 
-    
+              </a>
+              <a
+                href="#pakketten"
+                className="inline-flex items-center gap-2 h-12 px-7 text-sm font-medium bg-background text-foreground rounded-full hover:opacity-90 active:scale-[0.97] transition-all duration-150 whitespace-nowrap group"
+              >
+               Bel direct op 06 12345678
+              </a>
+             
+            </motion.div>
+       
+
       </div>
     </section>
   );
