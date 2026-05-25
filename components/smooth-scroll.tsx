@@ -15,37 +15,37 @@ const LENIS_OPTIONS = {
   gestureOrientation: "vertical" as const,
   smoothWheel: true,
   wheelMultiplier: 1,
-  touchMultiplier: 2,
-};
+  syncTouch: false,
+  autoRaf: true,
+} as const;
+
+/** Lenis + native touch momentum scroll conflict; use native scroll on touch devices. */
+function prefersNativeTouchScroll(): boolean {
+  return (
+    window.matchMedia("(hover: none)").matches ||
+    window.matchMedia("(pointer: coarse)").matches
+  );
+}
 
 export function SmoothScroll({ children }: { children: ReactNode }): ReactNode {
   useEffect(() => {
     if (!features.smoothScroll) return;
 
-    // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion || prefersNativeTouchScroll()) return;
 
     const lenis = new Lenis(LENIS_OPTIONS);
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    // Handle anchor link clicks
     function handleAnchorClick(e: MouseEvent) {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a[href^="#"]');
       if (!anchor) return;
 
-      const href = anchor.getAttribute('href');
-      if (!href || href === '#') return;
+      const href = anchor.getAttribute("href");
+      if (!href || href === "#") return;
 
       const element = document.querySelector(href);
       if (!element) return;
@@ -54,10 +54,10 @@ export function SmoothScroll({ children }: { children: ReactNode }): ReactNode {
       lenis.scrollTo(element as HTMLElement, { offset: -100 });
     }
 
-    document.addEventListener('click', handleAnchorClick);
+    document.addEventListener("click", handleAnchorClick);
 
     return () => {
-      document.removeEventListener('click', handleAnchorClick);
+      document.removeEventListener("click", handleAnchorClick);
       lenis.destroy();
     };
   }, []);

@@ -54,7 +54,7 @@ export function FAQ(): ReactNode {
   const items = faqs.map((f) => ({ title: f.question, content: f.answer }));
 
   return (
-    <section id="veelgestelde-vragen" className="relative w-full bg-background py-24 sm:py-32 overflow-hidden">
+    <section id="veelgestelde-vragen" className="relative w-full bg-background py-24 sm:py-32 overflow-x-hidden">
       <div className="relative mx-auto max-w-7xl px-0 xl:px-12">
         <div className="px-8 sm:px-12">
           <div className="max-w-2xl mb-12">

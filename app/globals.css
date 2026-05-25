@@ -44,6 +44,11 @@ html {
   overflow-x: hidden;
 }
 
+/* Lenis handles smooth scroll on desktop; avoid double-smoothing */
+html.lenis {
+  scroll-behavior: auto;
+}
+
 html.dark {
   color-scheme: dark;
 }
