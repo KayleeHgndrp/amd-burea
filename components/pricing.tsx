@@ -198,7 +198,7 @@ export function Pricing(): ReactNode {
   const [audience, setAudience] = useState<Audience>("zzp");
 
   return (
-    <section className="relative w-full bg-background py-24 sm:py-32">
+    <section id="pakketten" className="relative w-full bg-background py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
 
         {/* Heading */}

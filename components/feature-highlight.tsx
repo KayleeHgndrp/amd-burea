@@ -22,7 +22,7 @@ const features = [
   },
 ];
 
-function PhoneInCard(): ReactNode {
+function RightImage(): ReactNode {
   return (
     <div className="absolute inset-0 rounded-md border border-accent/10 overflow-hidden">
       <Image
@@ -83,7 +83,7 @@ export function FeatureHighlight(): ReactNode {
             </motion.ul>
 
             <motion.a
-              href="#"
+              href="#diensten"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -103,7 +103,7 @@ export function FeatureHighlight(): ReactNode {
             transition={{ duration: 0.8, delay: 0.2, ease }}
             className="relative w-full h-full min-h-[360px] sm:min-h-[420px]"
           >
-            <PhoneInCard />
+            <RightImage />
           </motion.div>
         </div>
       </div>

@@ -59,7 +59,7 @@ export function Services(): ReactNode {
   const items = services.map((s) => ({ title: s.name, content: s.description }));
 
   return (
-    <section className="relative w-full bg-background py-24 sm:py-32 overflow-hidden">
+    <section id="diensten" className="relative w-full bg-background py-24 sm:py-32 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
 
@@ -105,7 +105,7 @@ export function Services(): ReactNode {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </a>
               <a
-                href="#contact"
+                href="/contact"
                 className="inline-flex items-center justify-center gap-2 h-12 px-7 text-sm font-medium border border-border text-foreground rounded-full hover:bg-muted active:scale-[0.97] transition-all duration-150 whitespace-nowrap"
               >
                 Plan kennismaking
