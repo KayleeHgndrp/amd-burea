@@ -10,7 +10,6 @@ import { Principles } from "@/components/principles";
 import { Services } from "@/components/services";
 import { Stats } from "@/components/stats";
 import { TestimonialsSlider } from "@/components/testimonials-slider";
-import { TrustedBy } from "@/components/trusted-by";
 import { createMetadata, siteConfig } from "@/lib/metadata";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
