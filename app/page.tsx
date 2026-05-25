@@ -10,7 +10,8 @@ import { Principles } from "@/components/principles";
 import { Services } from "@/components/services";
 import { Stats } from "@/components/stats";
 import { TestimonialsSlider } from "@/components/testimonials-slider";
-import { siteConfig } from "@/lib/config";
+import { getHomeCollections } from "@/lib/cms/get-collections";
+import { features, siteConfig } from "@/lib/config";
 import { createMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
@@ -21,7 +22,9 @@ export const metadata: Metadata = createMetadata({
   path: "/",
 });
 
-export default function HomePage(): ReactNode {
+export default async function HomePage(): Promise<ReactNode> {
+  const { blogs, teams } = await getHomeCollections();
+
   return (
     <>
       <main id="main-content" className="flex-1">
@@ -29,12 +32,14 @@ export default function HomePage(): ReactNode {
         <FeatureCards />
         <FeatureHighlight />
         <Principles />
-        <Stats /> 
+        <Stats />
         <Services />
-        <TestimonialsSlider />
+        {features.testimonialsSection && (
+          <TestimonialsSlider members={teams} />
+        )}
         <Pricing />
         <FAQ />
-        <BlogShowcase />
+        {features.blogSection && <BlogShowcase articles={blogs} />}
         <FinalCTA />
       </main>
       <Footer />

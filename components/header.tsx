@@ -13,6 +13,7 @@ const navLinks: NavItem[] = [
   { label: "Diensten", href: "/#diensten" },
   { label: "Pakketten", href: "/#pakketten" },
   { label: "Veelgestelde vragen", href: "/#veelgestelde-vragen" },
+  { label: "Blogs", href: "/blogs" },
   { label: "Contact", href: "/contact" },
 ];
 

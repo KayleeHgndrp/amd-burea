@@ -14,6 +14,8 @@ export const siteConfig = {
     "Persoonlijke boekhouder voor ZZP'ers en MKB. Vaste prijs, eigen contactpersoon, klare taal.",
   url: "https://amd-bureau.nl",
   twitter: "@amd-bureau",
+  /** CMS tenant slug voor Supabase RPC get_collections */
+  tenantSlug: "amd-bureau",
   street: "Laan van Norfolk 7",
   city: "Hoofddorp",
   zipCode: "2135 XD",

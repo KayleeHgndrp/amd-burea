@@ -94,27 +94,36 @@ export function createMetadata({
   description,
   path = "/",
   image,
+  authors,
   noIndex = false,
 }: {
   title?: string;
   description?: string;
   path?: string;
   image?: string;
+  authors?: { name: string; url?: string }[];
   noIndex?: boolean;
 }): Metadata {
   const url = `${siteConfig.url}${path}`;
   const ogImage = image ?? siteConfig.ogImage;
+  const authorList = authors?.map((author) => ({
+    name: author.name,
+    ...(author.url ? { url: author.url } : {}),
+  }));
 
   return {
     title,
     description,
+    ...(authorList && authorList.length > 0 ? { authors: authorList } : {}),
     alternates: {
       canonical: path,
     },
     openGraph: {
+      type: "article",
       title: title ?? siteConfig.name,
       description: description ?? siteConfig.description,
       url,
+      ...(authorList && authorList.length > 0 ? { authors: authorList.map((a) => a.name) } : {}),
       images: [
         {
           url: ogImage,

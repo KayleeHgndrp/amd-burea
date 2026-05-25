@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef, useLayoutEffect, type ReactNode } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "motion/react";
+import type { TeamMember } from "@/lib/cms/types";
 import Image from "next/image";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -10,32 +11,6 @@ const AUTO_SCROLL_INTERVAL = 4000;
 const TRANSITION_DURATION = 600;
 const CLONE_COUNT = 3;
 const GAP_PX = 24;
-
-type Testimonial = {
-  name: string;
-  role: string;
-  company: string;
-  image: string;
-  linkedIn?: string;
-};
-
-const testimonials: Testimonial[] = [
-  {
-    name: "Sarah Mitchell",
-    role: "CFO",
-    company: "TechFlow Inc",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop&crop=face",
-    linkedIn: "#",
-  },
-  {
-    name: "Marcus Chen",
-    role: "Head of Finance",
-    company: "Nexus Ventures",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face",
-    linkedIn: "#",
-  },
-
-];
 
 function useVisibleCount() {
   const [visibleCount, setVisibleCount] = useState(3);
@@ -62,16 +37,86 @@ function LinkedInIcon() {
   );
 }
 
-export function TestimonialsSlider(): ReactNode {
+function SectionHeading() {
+  return (
+    <motion.h2
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, ease }}
+      className="text-3xl sm:text-4xl lg:text-5xl font-medium font-serif leading-tight text-foreground text-center mb-16"
+    >
+      Maak kennis met ons team
+    </motion.h2>
+  );
+}
+
+function MemberCard({ member }: { member: TeamMember }) {
+  return (
+    <div className="group">
+      <div className="relative aspect-4/5 overflow-hidden bg-muted rounded-sm mb-4">
+        <Image
+          src={member.image}
+          alt={member.name}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      </div>
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex-1">
+          <h3 className="text-lg font-medium text-foreground">{member.name}</h3>
+          <p className="text-sm text-foreground/60 mt-1">
+            {member.role}
+            {member.role && member.company ? " · " : ""}
+            {member.company}
+          </p>
+        </div>
+        {member?.linkedIn && <a
+            href={member.linkedIn}
+            className="shrink-0 p-2 border border-foreground/20 rounded-full hover:bg-foreground/5 transition-colors"
+            aria-label={`${member.name} op LinkedIn`}
+            target="_blank"
+          >
+            <LinkedInIcon />
+          </a>
+        }
+      </div>
+    </div>
+  );
+}
+
+function SingleTestimonial({ member }: { member: TeamMember | undefined }) {
+
+  if (!member) return null;
+
+  return (
+    <section className="relative w-full bg-background py-24 sm:py-32 overflow-hidden">
+      <div className="relative mx-auto max-w-270 px-6 sm:px-8">
+        <div className="px-4 sm:px-8 lg:px-12">
+          <SectionHeading />
+            <div className="flex justify-center">
+              <div className="w-full max-w-sm">
+              <MemberCard member={member} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TestimonialsCarousel({ members }: { members: TeamMember[] }) {
   const visibleCount = useVisibleCount();
-  const itemCount = testimonials.length;
+  const itemCount = members.length;
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
 
   const extendedTestimonials = [
-    ...testimonials.slice(-CLONE_COUNT),
-    ...testimonials,
-    ...testimonials.slice(0, CLONE_COUNT),
+    ...members.slice(-CLONE_COUNT),
+    ...members,
+    ...members.slice(0, CLONE_COUNT),
   ];
 
   const [currentIndex, setCurrentIndex] = useState(CLONE_COUNT);
@@ -194,15 +239,7 @@ export function TestimonialsSlider(): ReactNode {
     >
       <div className="relative mx-auto max-w-270 px-6 sm:px-8">
         <div className="px-4 sm:px-8 lg:px-12">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-medium font-serif leading-tight text-foreground text-center mb-16"
-          >
-            Maak kennis met ons team
-          </motion.h2>
+          <SectionHeading />
 
           <div className="relative">
             <div ref={containerRef} className="overflow-hidden" style={maskStyle}>
@@ -214,11 +251,11 @@ export function TestimonialsSlider(): ReactNode {
                   willChange: "transform",
                 }}
               >
-                {extendedTestimonials.map((testimonial, index) => {
+                {extendedTestimonials.map((member, index) => {
                   const isActive = index === currentIndex;
                   return (
                     <div
-                      key={`${testimonial.name}-${index}`}
+                      key={`${member.name}-${index}`}
                       className="shrink-0 transition-all duration-500"
                       style={{
                         width: cardWidth,
@@ -226,35 +263,7 @@ export function TestimonialsSlider(): ReactNode {
                         opacity: isActive ? 1 : 0.7,
                       }}
                     >
-                      <div className="group">
-                        <div className="relative aspect-4/5 overflow-hidden bg-muted rounded-sm mb-4">
-                          <Image
-                            src={testimonial.image}
-                            alt={testimonial.name}
-                            fill
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                          <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        </div>
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="flex-1">
-                            <h3 className="text-lg font-medium text-foreground">{testimonial.name}</h3>
-                            <p className="text-sm text-foreground/60 mt-1">
-                              {testimonial.role} at {testimonial.company}
-                            </p>
-                          </div>
-                          {testimonial.linkedIn && (
-                            <a
-                              href={testimonial.linkedIn}
-                              className="shrink-0 p-2 border border-foreground/20 rounded-full hover:bg-foreground/5 transition-colors"
-                              aria-label={`${testimonial.name}'s LinkedIn`}
-                            >
-                              <LinkedInIcon />
-                            </a>
-                          )}
-                        </div>
-                      </div>
+                      <MemberCard member={member} />
                     </div>
                   );
                 })}
@@ -290,4 +299,14 @@ export function TestimonialsSlider(): ReactNode {
       </div>
     </section>
   );
+}
+
+type TestimonialsSliderProps = {
+  members: TeamMember[];
+};
+
+export function TestimonialsSlider({ members }: TestimonialsSliderProps): ReactNode {
+  if (members.length === 0) return null;
+  if (members.length === 1) return <SingleTestimonial member={members[0]} />;
+  return <TestimonialsCarousel members={members} />;
 }
