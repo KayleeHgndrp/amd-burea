@@ -33,7 +33,6 @@ const footerLinks = {
 const legalLinks = [
   { label: "Privacyverklaring", href: "/privacy" },
   { label: "Algemene voorwaarden", href: "/voorwaarden" },
-  { label: "Cookie-instellingen", href: "/cookies" },
 ];
 
 const year = new Date().getFullYear();

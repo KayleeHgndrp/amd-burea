@@ -12,7 +12,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
  *
  * Theme tokens this component expects (Tailwind v4 @theme):
  *   --color-brand-900: ~ #0E1B33   deep navy (section base)
- *   --color-warm-50:   ~ #FAF5EE   cream (CTA pill, matches Hero primary)
+ *   --color-warm-50:   ~ #FAF5EE   cream (primary CTA pill, matches Hero)
  *
  * Shader is the same aurora as Hero.tsx (lifted navy base + amber/blue/teal
  * aurora + warm golden halo). Mouse interaction is stripped — this section
@@ -227,30 +227,26 @@ export function FinalCTA(): ReactNode {
         </motion.p>
 
         <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2, ease }}
-              className="mt-8 flex flex-col sm:flex-row gap-3"
-            >
-               <a
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 h-12 px-7 text-sm font-medium border border-border text-background rounded-full hover:bg-muted active:scale-[0.97] transition-all duration-150 whitespace-nowrap"
-              >
-                Plan kennismaking
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-
-              </a>
-              <a
-                href="#pakketten"
-                className="inline-flex items-center gap-2 h-12 px-7 text-sm font-medium bg-background text-foreground rounded-full hover:opacity-90 active:scale-[0.97] transition-all duration-150 whitespace-nowrap group"
-              >
-               Bel direct op 06 12345678
-              </a>
-             
-            </motion.div>
-       
-
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.4, ease }}
+          className="mt-10 flex flex-col sm:flex-row gap-3 justify-center"
+        >
+          <a
+            href="/contact"
+            className="group inline-flex items-center justify-center gap-2 h-12 px-7 text-sm font-medium bg-background text-foreground rounded-full hover:bg-background/90 transition-colors"
+          >
+            Plan kennismaking
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          </a>
+          <a
+            href="tel:+31612345678"
+            className="inline-flex items-center justify-center gap-2 h-12 px-7 text-sm font-medium border border-white/25 text-white rounded-full hover:bg-white/10 active:scale-[0.97] transition-all duration-150 whitespace-nowrap"
+          >
+            Bel direct op 06 12345678
+          </a>
+        </motion.div>
       </div>
     </section>
   );

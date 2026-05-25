@@ -192,8 +192,7 @@ function AdviesVisual(): ReactNode {
 
 function FeatureCard({ card, index }: { card: Feature; index: number }): ReactNode {
   return (
-    <motion.a
-      href={card.href}
+    <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ y: -4 }}
@@ -213,12 +212,9 @@ function FeatureCard({ card, index }: { card: Feature; index: number }): ReactNo
         <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
           {card.description}
         </p>
-        <div className="flex items-center gap-1 mt-4 text-sm font-medium text-foreground/80 group-hover:text-foreground transition-colors">
-          Meer weten
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-        </div>
+       
       </div>
-    </motion.a>
+    </motion.div>
   );
 }
 
