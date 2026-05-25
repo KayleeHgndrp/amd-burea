@@ -99,7 +99,7 @@ export function Services(): ReactNode {
             >
               <a
                 href="#pakketten"
-                className="inline-flex items-center gap-2 h-12 px-7 text-sm font-medium bg-[#0E1B33] text-white rounded-full hover:opacity-90 active:scale-[0.97] transition-all duration-150 whitespace-nowrap group"
+                className="inline-flex items-center justify-center  gap-2 h-12 px-7 text-sm font-medium bg-[#0E1B33] text-white rounded-full hover:opacity-90 active:scale-[0.97] transition-all duration-150 whitespace-nowrap group"
               >
                 Bekijk pakketten
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
