@@ -14,7 +14,7 @@ const features = [
   },
   {
     icon: <Zap className="w-4 h-4" />,
-    text: "Inkomstenbelasting.",
+    text: "Inkomstenbelasting",
   },
   {
     icon: <MessageSquare className="w-4 h-4" />,
@@ -49,20 +49,20 @@ export function FeatureHighlight(): ReactNode {
               transition={{ duration: 0.6, ease }}
               className="text-3xl sm:text-4xl lg:text-5xl font-medium font-serif leading-tight text-foreground"
             >
-              Jouw
-         
-              <span className="italic"> Persoonlijke</span>     <br />
+              Jouw <span className="italic">persoonlijke</span>
+              <br />
               boekhouder
             </motion.h2>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }} 
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1, ease }}
               className="mt-6 text-foreground/70 leading-relaxed max-w-lg"
             >
-              AI is woven throughout your entire Finaro experience. Access real-time insights and personalized recommendations.
+              Geen wisselende gezichten. Je hebt één vaste contactpersoon die je
+              administratie kent en je in klare taal helpt, van btw-aangifte tot inkomstenbelasting.
             </motion.p>
 
             <motion.ul
@@ -90,7 +90,7 @@ export function FeatureHighlight(): ReactNode {
               transition={{ duration: 0.5, delay: 0.3, ease }}
               className="group inline-flex items-center gap-2 mt-8 px-6 py-3 bg-foreground text-background rounded-full text-sm font-medium w-fit hover:bg-foreground/90 transition-colors"
             >
-              Bekijk ons diensten
+              Bekijk onze diensten
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </motion.a>
            
