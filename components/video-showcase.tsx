@@ -11,8 +11,7 @@ import {
   type RefObject,
 } from "react";
 
-const VIDEO_SRC =
-  "https://videos.pexels.com/video-files/3015510/3015510-hd_1920_1080_24fps.mp4";
+const VIDEO_SRC = "/videos/promo-bios-tattoo-heaven-1.mp4";
 const VIDEO_POSTER =
   "https://images.pexels.com/videos/3015510/free-video-3015510.jpg?auto=compress&cs=tinysrgb&w=1600";
 const MAX_WIDTH = 1440;

@@ -11,9 +11,6 @@
   --ring: oklch(0.708 0 0);
   --surface: #0a0a0a;
   --surface-foreground: #ffffff;
-  --font-sans: var(--font-poppins), system-ui, -apple-system, sans-serif;
-  --font-heading: var(--font-oswald), "Oswald", sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -87,9 +84,9 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
-  --font-sans: var(--font-sans);
-  --font-heading: var(--font-heading);
-  --font-mono: var(--font-mono);
+  --font-sans: var(--font-poppins), system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-oswald), sans-serif;
+  --font-mono: var(--font-geist-mono, ui-monospace), monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);

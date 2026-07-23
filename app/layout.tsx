@@ -3,7 +3,7 @@ import { SkipToContent } from "@/components/skip-to-content";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { baseMetadata } from "@/lib/metadata";
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono, Oswald, Poppins } from "next/font/google";
+import { Oswald, Poppins } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 
@@ -21,11 +21,7 @@ const oswald = Oswald({
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
+
 
 export const metadata: Metadata = baseMetadata;
 
@@ -45,9 +41,13 @@ export default function RootLayout({
   children: ReactNode;
 }>): ReactNode {
   return (
-    <html lang="en" suppressHydrationWarning className="font-sans">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${poppins.variable} ${oswald.variable} font-sans`}
+    >
       <body
-        className={`${poppins.variable} ${oswald.variable} ${geistMono.variable} bg-background text-foreground min-h-screen font-sans antialiased`}
+        className={`${poppins.variable} ${oswald.variable} bg-background text-foreground min-h-screen font-sans antialiased`}
       >
         <Providers>
           <SkipToContent />

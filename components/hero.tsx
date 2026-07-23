@@ -24,20 +24,20 @@ import {
 import * as THREE from "three";
 
 /**
- * Remote hero images (CORS-enabled, required for WebGL textures).
- * Tiles repeat through this list; swap in your own URLs here.
+ * Hero tattoo images — lokaal (same-origin) zodat ze werken als WebGL-textures.
+ * Bron: tattoo-heaven.nl (stijlen). Tiles herhalen door deze lijst.
  */
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1779881718722-5e7fa09fad7f?q=80&w=770&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1780150048191-2e1eefe95665?q=80&w=812&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1778051131564-192e359b601d?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1779465190086-021c2012bc4c?q=80&w=770&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1779630541798-1f3d987aa440?q=80&w=770&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1776715139438-c4b4076cc592?q=80&w=770&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1769968065389-60c3a887d14c?q=80&w=776&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1775668076243-1676696bf27e?q=80&w=778&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1773698719619-51e67f93a39f?q=80&w=818&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1771153568007-92b0997828ae?q=80&w=770&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "/images/hero/color-1.jpg",
+  "/images/hero/blackgrey-1.jpg",
+  "/images/hero/lettering-1.jpg",
+  "/images/hero/ornamental-1.jpg",
+  "/images/hero/chicano-1.jpg",
+  "/images/hero/fineline-1.jpg",
+  "/images/hero/color-2.jpg",
+  "/images/hero/blackgrey-2.jpg",
+  "/images/hero/fineline-2.jpg",
+  "/images/hero/ornamental-2.jpg",
 ];
 
 const IMAGE_COUNT = HERO_IMAGES.length;
@@ -59,6 +59,9 @@ const RINGS: Ring[] = [
   { radiusVmax: 57, radiusMax: 880, duration: 120, count: 17, phase: 42 },
   { radiusVmax: 75.5, radiusMax: 1180, duration: 155, count: 21, phase: 60 },
 ];
+
+/** Toggle voor de roterende WebGL-afbeeldingen in de hero (voor nu uit). */
+const SHOW_ROTATING_IMAGES = false;
 
 const TILE_MAX_PX = 144;
 const TILE_VW = 0.14;
@@ -579,23 +582,25 @@ export function Hero(): ReactNode {
         style={{ opacity: prefersReducedMotion ? 1 : scrollFade }}
         className="absolute inset-0 flex items-center justify-center"
       >
-        <motion.div
-          initial={false}
-          animate={
-            revealed ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }
-          }
-          transition={
-            prefersReducedMotion
-              ? { duration: 0.01 }
-              : revealed
-                ? { duration: 1.3, ease: softEase, delay: 0.15 }
-                : { duration: 0 }
-          }
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
-        >
-          <OrbitField images={imagesRef} />
-        </motion.div>
+        {SHOW_ROTATING_IMAGES && (
+          <motion.div
+            initial={false}
+            animate={
+              revealed ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }
+            }
+            transition={
+              prefersReducedMotion
+                ? { duration: 0.01 }
+                : revealed
+                  ? { duration: 1.3, ease: softEase, delay: 0.15 }
+                  : { duration: 0 }
+            }
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0"
+          >
+            <OrbitField images={imagesRef} />
+          </motion.div>
+        )}
 
         <div className="relative z-10 flex max-w-3xl flex-col items-center px-6 text-center">
           <motion.h1
