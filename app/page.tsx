@@ -36,9 +36,9 @@ export default function HomePage(): ReactNode {
         <Features />
    
         <Gallery />
-        <Integrations />
+    
         <Testimonials />
-        <Pricing />
+   
         <Faq />
         <FinalCta />
       </main>

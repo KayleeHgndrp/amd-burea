@@ -162,7 +162,7 @@ export function FinalCta(): ReactNode {
               backgroundColor: "var(--surface-foreground)",
               color: "var(--surface)",
             }}
-            className="focus-ring inline-flex h-13 items-center rounded-full px-8 text-sm font-medium"
+            className="focus-ring inline-flex h-13 items-center px-8 text-sm"
           >
             Get the app
           </Button>
@@ -170,7 +170,7 @@ export function FinalCta(): ReactNode {
             variant="none"
             size="none"
             render={<a href="#pricing" />}
-            className="focus-ring inline-flex h-13 items-center rounded-full border border-current/25 px-8 text-sm font-medium transition-opacity hover:opacity-70"
+            className="focus-ring inline-flex h-13 items-center border border-current/25 px-8 text-sm transition-opacity hover:opacity-70"
           >
             See pricing
           </Button>

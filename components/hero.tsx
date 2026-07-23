@@ -623,7 +623,7 @@ export function Hero(): ReactNode {
             <Button
               variant="default"
               size="none"
-              className="h-13 px-8 text-sm font-medium hover:opacity-85"
+              className="h-13 px-8 text-sm hover:opacity-85"
               render={<a href="#sign-up" />}
             >
               Afspraak maken
@@ -631,7 +631,7 @@ export function Hero(): ReactNode {
             <Button
               variant="outline"
               size="none"
-              className="h-13 px-8 text-sm font-medium"
+              className="h-13 px-8 text-sm"
               render={<a href="#product" />}
             >
               Meer over ons

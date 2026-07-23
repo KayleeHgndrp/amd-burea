@@ -255,7 +255,7 @@ function TierCard({
             : undefined
         }
         className={cn(
-          "focus-ring mt-9 inline-flex h-12 items-center justify-center rounded-full text-sm font-medium transition-opacity hover:opacity-85",
+          "focus-ring mt-9 inline-flex h-12 items-center justify-center text-sm transition-opacity hover:opacity-85",
           !highlighted &&
             "border-border text-foreground hover:bg-muted border hover:opacity-100"
         )}

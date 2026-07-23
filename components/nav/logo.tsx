@@ -10,11 +10,11 @@ export function Logo(): ReactNode {
     >
       <Image
         src="/logo-tattoo-heaven.avif"
-        alt="Tattoo Heaven"
+        alt="Tattoo Heaven Haarlem"
         width={452}
         height={320}
         priority
-        className="h-13 w-auto transition-transform duration-500 group-hover:scale-105"
+        className="h-16 w-auto transition-transform duration-500 group-hover:scale-105 sm:h-20"
       />
     </a>
   );
