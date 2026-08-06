@@ -12,7 +12,7 @@ export const siteConfig = {
   tagline: "Persoonlijke boekhouder voor ZZP'ers en MKB",
   description:
     "Persoonlijke boekhouder voor ZZP'ers en MKB. Vaste prijs, eigen contactpersoon, klare taal.",
-  url: "https://amd-bureau.nl",
+  url: "https://amdbureau.nl",
   twitter: "@amd-bureau",
   /** CMS tenant slug voor Supabase RPC get_collections */
   tenantSlug: "amd-bureau",
@@ -25,8 +25,8 @@ export const siteConfig = {
   gtmId: process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-KH35MC98",
 
   contact: {
-    email: "info@amd-bureau.nl",
-    kvk: "00000000",
+    email: "info@amdbureau.nl",
+    kvk: "76149706",
     phone: {
       /** E.164-formaat voor tel:-links */
       tel: "+31201234567",

@@ -47,10 +47,12 @@ export function FinalCTA(): ReactNode {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.2, ease }}
-          className="mt-6 text-lg lg:text-xl text-white/75 max-w-md mx-auto leading-relaxed"
+          className="mt-6 text-lg lg:text-xl text-white/75 max-w-xl mx-auto leading-relaxed"
         >
-          We regelen de overstap, jij merkt er niks van. Plan een gratis
-          kennismaking, dan kijken we wat past.
+          Benieuwd wat wij voor jou kunnen betekenen? Kennismaken kost je niets!
+          Tijdens een vrijblijvend kennismakingsgesprek kijken we naar jouw
+          onderneming, beantwoorden we je vragen, en kijken we of AMD Bureau bij
+          jou past.
         </motion.p>
 
         <motion.div

@@ -71,10 +71,10 @@ function CTAs(): ReactNode {
         Plan kennismaking
       </a>
       <a
-        href="#pakketten"
+        href="#diensten"
         className="h-12 px-7 text-sm font-medium border border-white/25 text-white rounded-full hover:bg-white/10 active:scale-[0.97] transition-all duration-150 inline-flex items-center justify-center whitespace-nowrap"
       >
-        Bekijk pakketten
+        Bekijk onze diensten
       </a>
     </div>
   );
@@ -140,9 +140,9 @@ export function Hero(): ReactNode {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5, ease }}
-              className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] tracking-tight text-white"
+              className="font-serif text-4xl sm:text-5xl md:text-6xl xl:text-7xl   leading-[0.95] tracking-tight text-white"
             >
-              Boekhouding zonder <em>gedoe.</em>
+              Grip op je cijfers, <em>rust in je bedrijf.</em>
             </motion.h1>
 
             <motion.p
@@ -151,8 +151,9 @@ export function Hero(): ReactNode {
               transition={{ duration: 0.6, delay: 0.7, ease }}
               className="mt-6 lg:mt-7 text-lg lg:text-xl text-white/75 max-w-md leading-relaxed"
             >
-              Voor ZZP&apos;ers die liever ondernemen dan administreren. Vaste
-              prijs, eigen boekhouder, klare taal.
+              Bij AMD Bureau geloven we dat goede cijfers leiden tot betere
+              keuzes. Wij zorgen voor overzicht, inzicht en rust, zodat jij kunt
+              doen waar je goed in bent.
             </motion.p>
 
             <motion.div

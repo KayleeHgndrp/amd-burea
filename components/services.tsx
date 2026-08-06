@@ -72,7 +72,7 @@ export function Services(): ReactNode {
               transition={{ duration: 0.6, ease }}
               className="text-3xl sm:text-4xl lg:text-5xl font-medium font-serif leading-tight text-foreground"
             >
-              Onze diensten
+              Meer dan een boekhouder.
             </motion.h2>
 
             <motion.div
@@ -83,10 +83,14 @@ export function Services(): ReactNode {
               className="mt-6 space-y-4 text-foreground/70 leading-relaxed max-w-md"
             >
               <p>
-                Bij ons ben je geen klantnummer. Je krijgt één vaste contactpersoon die jouw zaken kent, niet alleen je cijfers, maar ook je plannen en twijfels.
+                Wij verwerken niet alleen je administratie, we denken met je mee.
+                Of het nu gaat om belastingzaken, investeringen, personeelsgroei
+                of andere belangrijke keuzes: wij geven je het inzicht en de
+                zekerheid om met vertrouwen beslissingen te nemen.
               </p>
               <p>
-                Onze pakketten dekken de basis. Voor grote keuzes, regelingen of een geschil staan we er met je naast. Een overzicht van wat we leveren hieronder.
+                Zo bouwen we samen aan een gezonde financiële basis voor jouw
+                onderneming.
               </p>
             </motion.div>
 

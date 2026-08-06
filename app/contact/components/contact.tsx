@@ -97,19 +97,36 @@ const steps = [
 
 export function Contact(): ReactNode {
   const [form, setForm] = useState<FormData>(INITIAL_FORM);
+  const [honeypot, setHoneypot] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setSubmitting(true);
+    setError(null);
 
-    // TODO: wire this to your backend (Next.js server action, /api route, or external form service like Resend/Formspree)
-    // Example: await fetch("/api/contact", { method: "POST", body: JSON.stringify(form) });
-    await new Promise((r) => setTimeout(r, 600));
-
-    setSubmitting(false);
-    setSubmitted(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, company: honeypot }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error ?? "Versturen is niet gelukt");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Versturen is niet gelukt, probeer het later opnieuw",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -158,6 +175,17 @@ export function Contact(): ReactNode {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                {/* Honeypot tegen spambots: onzichtbaar voor bezoekers */}
+                <input
+                  type="text"
+                  name="company"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="hidden"
+                />
                 <Field label="Naam" required>
                   <input
                     type="text"
@@ -209,6 +237,12 @@ export function Contact(): ReactNode {
                     className={`${inputClass} h-auto py-3 resize-y min-h-32`}
                   />
                 </Field>
+
+                {error && (
+                  <p className="text-sm text-red-600" role="alert">
+                    {error}
+                  </p>
+                )}
 
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4 mt-2">
                   <button

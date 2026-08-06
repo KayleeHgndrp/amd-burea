@@ -39,15 +39,27 @@ function LinkedInIcon() {
 
 function SectionHeading() {
   return (
-    <motion.h2
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, ease }}
-      className="text-3xl sm:text-4xl lg:text-5xl font-medium font-serif leading-tight text-foreground text-center mb-16"
-    >
-      Maak kennis met ons team
-    </motion.h2>
+    <div className="text-center mb-16">
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease }}
+        className="text-3xl sm:text-4xl lg:text-5xl font-medium font-serif leading-tight text-foreground"
+      >
+        De mensen achter AMD Bureau
+      </motion.h2>
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.1, ease }}
+        className="mt-4 text-foreground/70 leading-relaxed max-w-xl mx-auto"
+      >
+        Goede samenwerking begint met vertrouwen. Maak kennis met het team dat
+        iedere dag klaarstaat om ondernemers overzicht, inzicht en rust te geven.
+      </motion.p>
+    </div>
   );
 }
 

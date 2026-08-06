@@ -3,11 +3,11 @@
 import { type ReactNode } from "react";
 import {
   Sparkles,
-  Landmark,
-  CreditCard,
-  BarChart3,
+  BadgeEuro,
+  Clock,
+  HeartHandshake,
   ArrowRight,
-  Shield,
+  UserRound,
 } from "lucide-react";
 import { motion } from "motion/react";
 import { siteConfig } from "@/lib/config";
@@ -21,19 +21,19 @@ type PrincipleCard = {
 
 const principles: PrincipleCard[] = [
   {
-    icon: <Landmark className="w-12 h-12" strokeWidth={1} />,
+    icon: <BadgeEuro className="w-12 h-12" strokeWidth={1} />,
     label: "Vaste prijs, geen verrassingen",
   },
   {
-    icon: <Shield className="w-12 h-12" strokeWidth={1} />,
+    icon: <UserRound className="w-12 h-12" strokeWidth={1} />,
     label: "Persoonlijk, je bent geen nummer",
   },
   {
-    icon: <CreditCard className="w-12 h-12" strokeWidth={1} />,
+    icon: <Clock className="w-12 h-12" strokeWidth={1} />,
     label: "Op werkdagen binnen 24 uur antwoord",
   },
   {
-    icon: <BarChart3 className="w-12 h-12" strokeWidth={1} />,
+    icon: <HeartHandshake className="w-12 h-12" strokeWidth={1} />,
     label: "We nemen je problemen uit handen",
   },
 ];
@@ -62,8 +62,8 @@ export function Principles(): ReactNode {
               transition={{ duration: 0.6, delay: 0.1, ease }}
               className="text-3xl sm:text-4xl lg:text-5xl font-medium font-serif leading-tight"
             >
-              Boekhouding zoals{" "}
-              <span className="italic">het hoort.</span>
+              Hier begint{" "}
+              <span className="italic">financiële rust.</span>
             </motion.h2>
 
             <motion.p
@@ -73,7 +73,11 @@ export function Principles(): ReactNode {
               transition={{ duration: 0.5, delay: 0.2, ease }}
               className="mt-6 text-foreground/70 leading-relaxed max-w-lg"
             >
-              We zijn opgericht door en voor ondernemers. Geen ingewikkeld jargon, geen anonieme tickets, gewoon vakwerk met een menselijk gezicht.
+              Ondernemen vraagt al genoeg van je. Je administratie zou daar geen
+              extra zorg aan moeten toevoegen. Wij zorgen ervoor dat je
+              administratie klopt, deadlines worden gehaald en jij altijd weet
+              waar je financieel staat. Zo kun jij met een gerust gevoel
+              vooruitkijken en je focussen op de groei van je onderneming.
             </motion.p>
 
             <motion.a

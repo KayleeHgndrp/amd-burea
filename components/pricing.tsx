@@ -219,7 +219,10 @@ export function Pricing(): ReactNode {
             transition={{ duration: 0.5, delay: 0.1, ease }}
             className="mt-4 text-foreground/60 max-w-lg"
           >
-            Vaste prijs per maand, geen verrassingen. Kies wat past en schaal mee als je groeit.
+            Iedere onderneming is anders. Daarom kies je bij AMD Bureau een
+            pakket dat past bij jouw situatie. Voor een vaste prijs per maand
+            weet je precies waar je aan toe bent. Geen verrassingen achteraf, wel
+            persoonlijke begeleiding wanneer jij die nodig hebt.
           </motion.p>
         </div>
 
