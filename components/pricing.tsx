@@ -176,7 +176,7 @@ function PricingCard({
       </ul>
 
       <a
-        href="#contact"
+        href={`/contact?pakket=${plan.name.toLowerCase()}&type=${audience}`}
         className={`group inline-flex items-center justify-center gap-2 px-5 h-12 rounded-full text-sm font-medium transition-all duration-150 active:scale-[0.97] ${
           plan.featured
             ? "bg-[#0E1B33] text-white hover:opacity-90"

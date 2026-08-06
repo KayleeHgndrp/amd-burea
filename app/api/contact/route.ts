@@ -8,11 +8,18 @@ const AUDIENCE_LABELS: Record<string, string> = {
   "niet-zeker": "Nog niet zeker",
 };
 
+const PLAN_LABELS: Record<string, string> = {
+  growth: "Growth",
+  pro: "Pro",
+  premium: "Premium",
+};
+
 type ContactPayload = {
   name?: string;
   email?: string;
   phone?: string;
   audience?: string;
+  plan?: string;
   message?: string;
   /** Honeypot: echte bezoekers laten dit veld leeg */
   company?: string;
@@ -39,6 +46,7 @@ export async function POST(request: Request) {
   const phone = payload.phone?.trim() ?? "";
   const message = payload.message?.trim() ?? "";
   const audience = AUDIENCE_LABELS[payload.audience ?? ""] ?? "Onbekend";
+  const plan = PLAN_LABELS[payload.plan ?? ""] ?? "Nog geen voorkeur";
 
   // Honeypot gevuld: door een bot ingevuld, doe alsof het gelukt is
   if (payload.company) {
@@ -81,6 +89,7 @@ export async function POST(request: Request) {
     `E-mail: ${email}`,
     `Telefoon: ${phone || "-"}`,
     `Type ondernemer: ${audience}`,
+    `Pakket: ${plan}`,
     "",
     "Bericht:",
     message,
@@ -91,7 +100,7 @@ export async function POST(request: Request) {
       from: `"${siteConfig.name} website" <${from}>`,
       to: siteConfig.contact.email,
       replyTo: `"${name}" <${email}>`,
-      subject: `Nieuwe aanvraag via de website — ${name}`,
+      subject: `Nieuwe aanvraag via de website — ${name}${PLAN_LABELS[payload.plan ?? ""] ? ` (${plan})` : ""}`,
       text: lines.join("\n"),
       html: lines.map((l) => escapeHtml(l) || "<br>").join("<br>"),
     });

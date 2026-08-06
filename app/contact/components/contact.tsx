@@ -9,11 +9,14 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 type Audience = "zzp" | "mkb" | "niet-zeker";
 
+export type Plan = "growth" | "pro" | "premium" | "";
+
 type FormData = {
   name: string;
   email: string;
   phone: string;
   audience: Audience;
+  plan: Plan;
   message: string;
 };
 
@@ -22,8 +25,42 @@ const INITIAL_FORM: FormData = {
   email: "",
   phone: "",
   audience: "zzp",
+  plan: "",
   message: "",
 };
+
+function PlanToggle({
+  value,
+  onChange,
+}: {
+  value: Plan;
+  onChange: (v: Plan) => void;
+}): ReactNode {
+  const options: { value: Plan; label: string }[] = [
+    { value: "growth", label: "Growth" },
+    { value: "pro", label: "Pro" },
+    { value: "premium", label: "Premium" },
+    { value: "", label: "Weet ik nog niet" },
+  ];
+  return (
+    <div className="inline-flex flex-wrap items-center gap-1 p-1 bg-muted rounded-full border border-border">
+      {options.map((opt) => (
+        <button
+          key={opt.value}
+          type="button"
+          onClick={() => onChange(opt.value)}
+          className={`px-4 h-9 text-sm font-medium rounded-full transition-colors ${
+            value === opt.value
+              ? "bg-[#0E1B33] text-white"
+              : "text-foreground/60 hover:text-foreground"
+          }`}
+        >
+          {opt.label}
+        </button>
+      ))}
+    </div>
+  );
+}
 
 function AudienceToggle({
   value,
@@ -95,8 +132,18 @@ const steps = [
   },
 ];
 
-export function Contact(): ReactNode {
-  const [form, setForm] = useState<FormData>(INITIAL_FORM);
+export function Contact({
+  initialPlan = "",
+  initialAudience,
+}: {
+  initialPlan?: Plan;
+  initialAudience?: Audience;
+}): ReactNode {
+  const [form, setForm] = useState<FormData>({
+    ...INITIAL_FORM,
+    plan: initialPlan,
+    audience: initialAudience ?? INITIAL_FORM.audience,
+  });
   const [honeypot, setHoneypot] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -227,6 +274,15 @@ export function Contact(): ReactNode {
                   />
                 </Field>
 
+                {initialPlan && (
+                  <Field label="Welk pakket heeft je interesse?">
+                    <PlanToggle
+                      value={form.plan}
+                      onChange={(v) => setForm({ ...form, plan: v })}
+                    />
+                  </Field>
+                )}
+
                 <Field label="Bericht" required>
                   <textarea
                     required
@@ -253,9 +309,7 @@ export function Contact(): ReactNode {
                     {submitting ? "Versturen..." : "Verstuur bericht"}
                     {!submitting && <ArrowRight className="w-4 h-4" />}
                   </button>
-                  <p className="text-xs text-foreground/55">
-                    Antwoord binnen 24 uur. Geen verkoopgesprek.
-                  </p>
+             
                 </div>
               </form>
             )}

@@ -1,4 +1,4 @@
-import { Contact } from "./components/contact";
+import { Contact, type Plan } from "./components/contact";
 import { siteConfig } from "@/lib/config";
 import { createMetadata } from "@/lib/metadata";
 
@@ -8,6 +8,15 @@ export const metadata = createMetadata({
   path: "/contact",
 });
 
-export default function ContactPage() {
-  return <Contact />;
+const PLANS: Plan[] = ["growth", "pro", "premium"];
+
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ pakket?: string; type?: string }>;
+}) {
+  const { pakket, type } = await searchParams;
+  const plan = PLANS.find((p) => p === pakket) ?? "";
+  const audience = type === "mkb" ? ("mkb" as const) : ("zzp" as const);
+  return <Contact initialPlan={plan} initialAudience={audience} />;
 }
