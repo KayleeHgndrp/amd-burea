@@ -16,7 +16,7 @@ export function accountingServiceJsonLd() {
     name: siteConfig.name,
     description: siteConfig.description,
     url: siteConfig.url,
-    logo: `${siteConfig.url}/icon.svg`,
+    logo: `${siteConfig.url}/icon-512.png`,
     image: `${siteConfig.url}/og-image.png`,
     telephone: siteConfig.contact.phone.tel,
     email: siteConfig.contact.email,

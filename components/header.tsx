@@ -81,11 +81,11 @@ export function Header(): ReactNode {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1, ease }}
           >
-            <div
-              className="w-6 h-6 rounded-full bg-white"
-              aria-hidden="true"
+            <img
+              src="/images/logo-amd-bureau-white.avif"
+              alt=""
+              className="h-10 w-auto"
             />
-            <span className="text-lg font-semibold text-white">{siteConfig.name}</span>
           </motion.a>
 
           <motion.nav
@@ -133,11 +133,11 @@ export function Header(): ReactNode {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1, ease }}
           >
-            <div
-              className="w-6 h-6 rounded-full bg-white"
-              aria-hidden="true"
+            <img
+              src="/images/logo-amd-bureau-white.avif"
+              alt=""
+              className="h-10 w-auto"
             />
-            <span className="text-lg font-semibold text-white">{siteConfig.name}</span>
           </motion.a>
           <motion.button
             className="p-2 -mr-2"
@@ -169,13 +169,16 @@ export function Header(): ReactNode {
                 aria-label={`${siteConfig.name} home`}
                 onClick={closeMobileMenu}
               >
-                <div
-                  className="w-6 h-6 rounded-full bg-foreground"
-                  aria-hidden="true"
+                <img
+                  src="/images/logo-amd-bureau-navy.avif"
+                  alt=""
+                  className="h-10 w-auto dark:hidden"
                 />
-                <span className="text-lg font-semibold text-foreground">
-                  {siteConfig.name}
-                </span>
+                <img
+                  src="/images/logo-amd-bureau-white.avif"
+                  alt=""
+                  className="h-10 w-auto hidden dark:block"
+                />
               </a>
               <button
                 className="p-2 -mr-2"

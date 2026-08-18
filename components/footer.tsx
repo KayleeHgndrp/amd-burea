@@ -53,11 +53,21 @@ export function Footer(): ReactNode {
           <div className="relative w-full px-8 sm:px-12 py-12">
             <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-8">
               <div className="lg:max-w-xs">
-                <a href="/" className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-full bg-[#0E1B33]" />
-                  <span className="text-lg font-semibold text-foreground">
-                    {siteConfig.name}
-                  </span>
+                <a
+                  href="/"
+                  className="flex items-center gap-2"
+                  aria-label={`${siteConfig.name} home`}
+                >
+                  <img
+                    src="/images/logo-amd-bureau-navy.avif"
+                    alt=""
+                    className="h-10 w-auto dark:hidden"
+                  />
+                  <img
+                    src="/images/logo-amd-bureau-white.avif"
+                    alt=""
+                    className="h-10 w-auto hidden dark:block"
+                  />
                 </a>
                 <p className="mt-4 text-sm text-foreground/60 leading-relaxed max-w-xs">
                   {siteConfig.description}
