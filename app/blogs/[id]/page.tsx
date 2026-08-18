@@ -6,6 +6,11 @@ import { Footer } from "@/components/footer";
 import { getBlogPostPageData } from "@/lib/cms/get-collections";
 import { siteConfig } from "@/lib/config";
 import { createMetadata } from "@/lib/metadata";
+import {
+  blogPostingJsonLd,
+  breadcrumbsJsonLd,
+  jsonLdDocument,
+} from "@/lib/structured-data";
 import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -62,8 +67,21 @@ export default async function BlogPostPage({
   const { article, author, related } = data;
   const meta = [article.category, article.date, article.readTime].filter(Boolean);
 
+  const jsonLd = jsonLdDocument(
+    blogPostingJsonLd(article, author),
+    breadcrumbsJsonLd([
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/blogs" },
+      { name: article.title, path: `/blogs/${article.slug}` },
+    ]),
+  );
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <main id="main-content" className="flex-1">
         <article className="relative w-full bg-background py-24 sm:py-32">
           <div className="mx-auto max-w-3xl px-6 sm:px-8">

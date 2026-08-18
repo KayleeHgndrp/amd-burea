@@ -32,7 +32,7 @@ function RightImage(): ReactNode {
   return (
     <div className="absolute inset-0 rounded-md border border-accent/10 overflow-hidden">
       <Image
-        src="/images/test.png"
+        src="/images/feature-team.avif"
         alt="Persoonlijke boekhouder"
         fill
         className="object-cover object-center"

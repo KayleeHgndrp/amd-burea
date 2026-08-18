@@ -12,7 +12,11 @@ export const siteConfig = {
   tagline: "Persoonlijke boekhouder voor ZZP'ers en MKB",
   description:
     "Persoonlijke boekhouder voor ZZP'ers en MKB. Vaste prijs, eigen contactpersoon, klare taal.",
-  url: "https://amdbureau.nl",
+  /**
+   * Canonieke URL. De site draait op www (Vercel); het kale domein wijst nog
+   * naar de oude Apache/WordPress-server en redirect naar www.
+   */
+  url: "https://www.amdbureau.nl",
   twitter: "@amd-bureau",
   /** CMS tenant slug voor Supabase RPC get_collections */
   tenantSlug: "amd-bureau",
@@ -29,9 +33,9 @@ export const siteConfig = {
     kvk: "76149706",
     phone: {
       /** E.164-formaat voor tel:-links */
-      tel: "+31201234567",
+      tel: "+31611425333",
       /** Weergave op de site */
-      display: "020 123 45 67",
+      display: "06 11 42 53 33",
     },
     hours: "Ma-Vr, 9:00 tot 17:30",
   },

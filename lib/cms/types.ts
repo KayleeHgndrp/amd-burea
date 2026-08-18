@@ -11,6 +11,8 @@ export type BlogArticle = {
 export type BlogArticleDetail = BlogArticle & {
   slug: string;
   content: string;
+  /** Publicatiedatum in ISO-formaat, voor structured data */
+  publishedAt?: string;
   /** UUID's van gerelateerde blogposts */
   relatedIds: string[];
   /** UUID van teamlid (author) */

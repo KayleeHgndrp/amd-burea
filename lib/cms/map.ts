@@ -67,6 +67,16 @@ export function mapBlogEntry(entry: CmsEntry): BlogArticle | null {
   };
 }
 
+function toIsoDate(value: unknown): string | undefined {
+  const raw = asString(value);
+  if (!raw) return undefined;
+
+  const date = new Date(raw);
+  if (Number.isNaN(date.getTime())) return undefined;
+
+  return date.toISOString();
+}
+
 export function mapBlogDetail(entry: CmsEntry): BlogArticleDetail | null {
   const article = mapBlogEntry(entry);
   if (!article) return null;
@@ -85,6 +95,7 @@ export function mapBlogDetail(entry: CmsEntry): BlogArticleDetail | null {
   const authorId =
     asStringOrFirstInArray(entry.author) ?? asStringOrFirstInArray(entry.auteur);
   const relatedIds = parseRelatedIds(entry.related);
+  const publishedAt = toIsoDate(entry.published_at ?? entry.date ?? entry.created_at);
 
   return {
     ...article,
@@ -93,6 +104,7 @@ export function mapBlogDetail(entry: CmsEntry): BlogArticleDetail | null {
     href: `/blogs/${slug}`,
     relatedIds,
     ...(authorId ? { authorId } : {}),
+    ...(publishedAt ? { publishedAt } : {}),
   };
 }
 

@@ -9,6 +9,11 @@ const staticPages: MetadataRoute.Sitemap = [
     priority: 1,
   },
   {
+    url: `${siteConfig.url}/boekhouder-hoofddorp`,
+    changeFrequency: "monthly",
+    priority: 0.9,
+  },
+  {
     url: `${siteConfig.url}/blogs`,
     changeFrequency: "weekly",
     priority: 0.8,
@@ -20,6 +25,11 @@ const staticPages: MetadataRoute.Sitemap = [
   },
   {
     url: `${siteConfig.url}/voorwaarden`,
+    changeFrequency: "yearly",
+    priority: 0.3,
+  },
+  {
+    url: `${siteConfig.url}/privacy`,
     changeFrequency: "yearly",
     priority: 0.3,
   },

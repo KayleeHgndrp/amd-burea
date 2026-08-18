@@ -13,6 +13,11 @@ import { TestimonialsSlider } from "@/components/testimonials-slider";
 import { getHomeCollections } from "@/lib/cms/get-collections";
 import { features, siteConfig } from "@/lib/config";
 import { createMetadata } from "@/lib/metadata";
+import {
+  accountingServiceJsonLd,
+  jsonLdDocument,
+  webSiteJsonLd,
+} from "@/lib/structured-data";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
@@ -22,11 +27,17 @@ export const metadata: Metadata = createMetadata({
   path: "/",
 });
 
+const jsonLd = jsonLdDocument(accountingServiceJsonLd(), webSiteJsonLd());
+
 export default async function HomePage(): Promise<ReactNode> {
   const { blogs, teams } = await getHomeCollections();
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <main id="main-content" className="flex-1">
         <Hero />
         <FeatureCards />

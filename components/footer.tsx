@@ -11,6 +11,7 @@ const footerLinks = {
       { label: "Aangiften", href: "/#diensten" },
       { label: "Advies", href: "/#diensten" },
       { label: "Pakketten", href: "/#pakketten" },
+      { label: "Boekhouder in Hoofddorp", href: "/boekhouder-hoofddorp" },
     ],
   },
 

@@ -91,7 +91,7 @@ export default function AlgemeneVoorwaardenPage(): ReactNode {
           <Clause nr="2.3">
             Op de overeenkomst is steeds de meest recente versie van deze
             algemene voorwaarden van toepassing. De actuele versie is te
-            raadplegen op {siteConfig.url}/algemene-voorwaarden.
+            raadplegen op {siteConfig.url}/voorwaarden.
           </Clause>
         </Section>
 

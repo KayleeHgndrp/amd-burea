@@ -7,7 +7,8 @@ import { DeadlineCard } from "./deadline-card";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const PHOTO_SRC = "/images/hero-meeting.png";
+const PHOTO_AVIF = "/images/hero-meeting.avif";
+const PHOTO_FALLBACK = "/images/hero-meeting.webp";
 
 // ─────────────────────────────────────────────────────────────────────
 // Helpers
@@ -182,11 +183,17 @@ export function Hero(): ReactNode {
             className="relative w-full aspect-[4/5] lg:aspect-auto lg:h-[560px] max-lg:max-w-md max-lg:mx-auto"
           >
             <div className="absolute inset-0 overflow-hidden rounded-[2rem] shadow-2xl ring-1 ring-white/10">
-              <img
-                src={PHOTO_SRC}
-                alt="Persoonlijke boekhouder voor ZZP'ers"
-                className="w-full h-full object-cover"
-              />
+              <picture className="block w-full h-full">
+                <source srcSet={PHOTO_AVIF} type="image/avif" />
+                <img
+                  src={PHOTO_FALLBACK}
+                  alt="Persoonlijke boekhouder voor ZZP'ers"
+                  width={1536}
+                  height={1024}
+                  fetchPriority="high"
+                  className="w-full h-full object-cover"
+                />
+              </picture>
               <div className="absolute inset-0 bg-gradient-to-t from-brand-900/45 via-transparent to-transparent" />
             </div>
 
