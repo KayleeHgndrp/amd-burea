@@ -29,7 +29,7 @@ export const siteConfig = {
   gtmId: process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-KH35MC98",
 
   contact: {
-    email: "mail@amdbureau.nl",
+    email: "info@amdbureau.nl",
     kvk: "76149706",
     phone: {
       /** E.164-formaat voor tel:-links */
